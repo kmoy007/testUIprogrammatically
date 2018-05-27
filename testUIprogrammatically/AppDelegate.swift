@@ -15,7 +15,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        
+        //km: set the size to the screen size.  what happens if this changes, eg landscape?
+        window = UIWindow(frame: UIScreen.main.bounds)     
+        
+        //km: create the first view controller
+        let nav = UINavigationController()
+        let homeViewController = ViewController()
+        
+        nav.viewControllers = [homeViewController]
+        window!.rootViewController = nav  //km: need the nav, not the homeView as root so we can have mulitpe view controllers later
+        window!.makeKeyAndVisible() //km: show
+        
         return true
     }
 

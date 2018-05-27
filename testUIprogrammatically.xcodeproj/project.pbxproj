@@ -9,11 +9,12 @@
 /* Begin PBXBuildFile section */
 		587F4EC720B50425007C9416 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 587F4EC620B50425007C9416 /* AppDelegate.swift */; };
 		587F4EC920B50425007C9416 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 587F4EC820B50425007C9416 /* ViewController.swift */; };
-		587F4ECC20B50425007C9416 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 587F4ECA20B50425007C9416 /* Main.storyboard */; };
 		587F4ECE20B50428007C9416 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 587F4ECD20B50428007C9416 /* Assets.xcassets */; };
-		587F4ED120B50428007C9416 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 587F4ECF20B50428007C9416 /* LaunchScreen.storyboard */; };
 		587F4EDC20B50428007C9416 /* testUIprogrammaticallyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 587F4EDB20B50428007C9416 /* testUIprogrammaticallyTests.swift */; };
 		587F4EE720B50428007C9416 /* testUIprogrammaticallyUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 587F4EE620B50428007C9416 /* testUIprogrammaticallyUITests.swift */; };
+		587F4EF720B5082E007C9416 /* SerialTextViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 587F4EF620B5082E007C9416 /* SerialTextViewController.swift */; };
+		587F4EF920B55108007C9416 /* SerialTextTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 587F4EF820B55108007C9416 /* SerialTextTableViewCell.swift */; };
+		58C2CA7920BA59D6006ACA97 /* SerialTextViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58C2CA7820BA59D5006ACA97 /* SerialTextViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,9 +38,7 @@
 		587F4EC320B50425007C9416 /* testUIprogrammatically.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = testUIprogrammatically.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		587F4EC620B50425007C9416 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		587F4EC820B50425007C9416 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		587F4ECB20B50425007C9416 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		587F4ECD20B50428007C9416 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		587F4ED020B50428007C9416 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		587F4ED220B50428007C9416 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		587F4ED720B50428007C9416 /* testUIprogrammaticallyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = testUIprogrammaticallyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		587F4EDB20B50428007C9416 /* testUIprogrammaticallyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = testUIprogrammaticallyTests.swift; sourceTree = "<group>"; };
@@ -47,6 +46,9 @@
 		587F4EE220B50428007C9416 /* testUIprogrammaticallyUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = testUIprogrammaticallyUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		587F4EE620B50428007C9416 /* testUIprogrammaticallyUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = testUIprogrammaticallyUITests.swift; sourceTree = "<group>"; };
 		587F4EE820B50428007C9416 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		587F4EF620B5082E007C9416 /* SerialTextViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SerialTextViewController.swift; sourceTree = "<group>"; };
+		587F4EF820B55108007C9416 /* SerialTextTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SerialTextTableViewCell.swift; sourceTree = "<group>"; };
+		58C2CA7820BA59D5006ACA97 /* SerialTextViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SerialTextViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,9 +101,10 @@
 			children = (
 				587F4EC620B50425007C9416 /* AppDelegate.swift */,
 				587F4EC820B50425007C9416 /* ViewController.swift */,
-				587F4ECA20B50425007C9416 /* Main.storyboard */,
+				587F4EF620B5082E007C9416 /* SerialTextViewController.swift */,
+				58C2CA7820BA59D5006ACA97 /* SerialTextViewModel.swift */,
+				587F4EF820B55108007C9416 /* SerialTextTableViewCell.swift */,
 				587F4ECD20B50428007C9416 /* Assets.xcassets */,
-				587F4ECF20B50428007C9416 /* LaunchScreen.storyboard */,
 				587F4ED220B50428007C9416 /* Info.plist */,
 			);
 			path = testUIprogrammatically;
@@ -229,9 +232,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				587F4ED120B50428007C9416 /* LaunchScreen.storyboard in Resources */,
 				587F4ECE20B50428007C9416 /* Assets.xcassets in Resources */,
-				587F4ECC20B50425007C9416 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -256,6 +257,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				587F4EF920B55108007C9416 /* SerialTextTableViewCell.swift in Sources */,
+				587F4EF720B5082E007C9416 /* SerialTextViewController.swift in Sources */,
+				58C2CA7920BA59D6006ACA97 /* SerialTextViewModel.swift in Sources */,
 				587F4EC920B50425007C9416 /* ViewController.swift in Sources */,
 				587F4EC720B50425007C9416 /* AppDelegate.swift in Sources */,
 			);
@@ -291,25 +295,6 @@
 			targetProxy = 587F4EE320B50428007C9416 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
-
-/* Begin PBXVariantGroup section */
-		587F4ECA20B50425007C9416 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				587F4ECB20B50425007C9416 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		587F4ECF20B50428007C9416 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				587F4ED020B50428007C9416 /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		587F4EE920B50428007C9416 /* Debug */ = {
