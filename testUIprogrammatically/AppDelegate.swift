@@ -26,9 +26,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         nav.viewControllers = [homeViewController]
         window!.rootViewController = nav  //km: need the nav, not the homeView as root so we can have mulitpe view controllers later
         window!.makeKeyAndVisible() //km: show
+        /*
+        homeViewController.view.translatesAutoresizingMaskIntoConstraints = false
+        homeViewController.view.leadingAnchor.constraint(equalTo: nav.view.leadingAnchor).isActive = true
+        homeViewController.view.trailingAnchor.constraint(equalTo: nav.view.trailingAnchor).isActive = true
+        homeViewController.view.topAnchor.constraint(equalTo: nav.navigationBar.topAnchor).isActive = true
+        homeViewController.view.bottomAnchor.constraint(equalTo: nav.view.bottomAnchor).isActive = true
+*/
         
         return true
     }
+    
 
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

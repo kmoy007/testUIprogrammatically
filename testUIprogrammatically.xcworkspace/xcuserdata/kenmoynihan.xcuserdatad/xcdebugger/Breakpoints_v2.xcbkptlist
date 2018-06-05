@@ -1,0 +1,546 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   type = "0"
+   version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "testUIprogrammatically/SerialTextViewController.swift"
+            timestampString = "549808393.10734"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "102"
+            endingLineNumber = "102"
+            landmarkName = "viewWillTransition(to:with:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "testUIprogrammatically/AppDelegate.swift"
+            timestampString = "549157502.258858"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "30"
+            endingLineNumber = "30"
+            landmarkName = "application(_:didFinishLaunchingWithOptions:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "testUIprogrammatically/ViewController.swift"
+            timestampString = "549261309.07574"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "38"
+            endingLineNumber = "38"
+            landmarkName = "tapHandler(gesture:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "testUIprogrammatically/Bluetooth Device Simulator/Simulator_UARTTextGenerator.swift"
+            timestampString = "549706061.254831"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "89"
+            endingLineNumber = "89">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "testUIprogrammaticallyTests/SimulatorTests/BLEFriendSimulatorTests.swift"
+            timestampString = "549808393.1077369"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "75"
+            endingLineNumber = "75"
+            landmarkName = "testfilterForToggleMode_withToggle()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "testUIprogrammaticallyTests/SimulatorTests/BLEFriendSimulatorTests.swift"
+            timestampString = "549808393.107898"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "68"
+            endingLineNumber = "68"
+            landmarkName = "testfilterForToggleMode_withToggle()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "testUIprogrammaticallyTests/SimulatorTests/BLEFriendSimulatorTests.swift"
+            timestampString = "549808393.108048"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "100"
+            endingLineNumber = "100"
+            landmarkName = "testgetNextStringTokenizedBynewline()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "testUIprogrammaticallyTests.BLEFriendSimulatorTests.testgetNextStringTokenizedBynewline() -&gt; ()"
+                  moduleName = "testUIprogrammaticallyTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/kenmoynihan/Development/testUIprogrammatically/testUIprogrammaticallyTests/SimulatorTests/BLEFriendSimulatorTests.swift"
+                  timestampString = "549374887.27466"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "99"
+                  endingLineNumber = "99"
+                  offsetFromSymbolStart = "4248">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "implicit closure #13 : @autoclosure () throws -&gt; Foundation.Data in testUIprogrammaticallyTests.BLEFriendSimulatorTests.testgetNextStringTokenizedBynewline() -&gt; ()"
+                  moduleName = "testUIprogrammaticallyTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/kenmoynihan/Development/testUIprogrammatically/testUIprogrammaticallyTests/SimulatorTests/BLEFriendSimulatorTests.swift"
+                  timestampString = "549374887.278636"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "99"
+                  endingLineNumber = "99"
+                  offsetFromSymbolStart = "12">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "implicit closure #14 : @autoclosure () throws -&gt; Foundation.Data in testUIprogrammaticallyTests.BLEFriendSimulatorTests.testgetNextStringTokenizedBynewline() -&gt; ()"
+                  moduleName = "testUIprogrammaticallyTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/kenmoynihan/Development/testUIprogrammatically/testUIprogrammaticallyTests/SimulatorTests/BLEFriendSimulatorTests.swift"
+                  timestampString = "549374887.282652"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "99"
+                  endingLineNumber = "99"
+                  offsetFromSymbolStart = "30">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "testUIprogrammatically/Bluetooth Device Simulator/BLEFriendSimulator.swift"
+            timestampString = "549808393.108179"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "136"
+            endingLineNumber = "136"
+            landmarkName = "ATCommandFilter(incomingMessage:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "testUIprogrammaticallyTests/SimulatorTests/BLEFriendSimulatorTests.swift"
+            timestampString = "549808393.108271"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "259"
+            endingLineNumber = "259"
+            landmarkName = "testwriteNVMCommands()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "testUIprogrammaticallyTests/SimulatorTests/BLEFriendSimulatorTests.swift"
+            timestampString = "549808393.108375"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "257"
+            endingLineNumber = "257"
+            landmarkName = "testwriteNVMCommands()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "testUIprogrammaticallyTests/SimulatorTests/BLEFriendSimulatorTests.swift"
+            timestampString = "549808393.108485"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "195"
+            endingLineNumber = "195"
+            landmarkName = "testsplitNVMCommands()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "testUIprogrammaticallyTests.BLEFriendSimulatorTests.testsplitNVMCommands() -&gt; ()"
+                  moduleName = "testUIprogrammaticallyTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/kenmoynihan/Development/testUIprogrammatically/testUIprogrammaticallyTests/SimulatorTests/BLEFriendSimulatorTests.swift"
+                  timestampString = "549423890.872991"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "187"
+                  endingLineNumber = "187"
+                  offsetFromSymbolStart = "3253">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "implicit closure #12 : @autoclosure () throws -&gt; Swift.Optional&lt;Any&gt; in testUIprogrammaticallyTests.BLEFriendSimulatorTests.testsplitNVMCommands() -&gt; ()"
+                  moduleName = "testUIprogrammaticallyTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/kenmoynihan/Development/testUIprogrammatically/testUIprogrammaticallyTests/SimulatorTests/BLEFriendSimulatorTests.swift"
+                  timestampString = "549423890.876919"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "187"
+                  endingLineNumber = "187"
+                  offsetFromSymbolStart = "22">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "testUIprogrammaticallyTests/SimulatorTests/BLEFriendSimulatorTests.swift"
+            timestampString = "549808393.108587"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "194"
+            endingLineNumber = "194"
+            landmarkName = "testsplitNVMCommands()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "testUIprogrammaticallyTests/SimulatorTests/BLEFriendSimulatorTests.swift"
+            timestampString = "549808393.108691"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "146"
+            endingLineNumber = "146"
+            landmarkName = "testreceiveBTmessage_compositetest_basic()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "testUIprogrammaticallyTests.BLEFriendSimulatorTests.testreceiveBTmessage_compositetest_basic() -&gt; ()"
+                  moduleName = "testUIprogrammaticallyTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/kenmoynihan/Development/testUIprogrammatically/testUIprogrammaticallyTests/SimulatorTests/BLEFriendSimulatorTests.swift"
+                  timestampString = "549426380.1898839"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "144"
+                  endingLineNumber = "144"
+                  offsetFromSymbolStart = "3478">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "implicit closure #9 : @autoclosure () throws -&gt; Foundation.Data in testUIprogrammaticallyTests.BLEFriendSimulatorTests.testreceiveBTmessage_compositetest_basic() -&gt; ()"
+                  moduleName = "testUIprogrammaticallyTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/kenmoynihan/Development/testUIprogrammatically/testUIprogrammaticallyTests/SimulatorTests/BLEFriendSimulatorTests.swift"
+                  timestampString = "549426380.195785"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "144"
+                  endingLineNumber = "144"
+                  offsetFromSymbolStart = "14">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "implicit closure #10 : @autoclosure () throws -&gt; Foundation.Data in testUIprogrammaticallyTests.BLEFriendSimulatorTests.testreceiveBTmessage_compositetest_basic() -&gt; ()"
+                  moduleName = "testUIprogrammaticallyTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/kenmoynihan/Development/testUIprogrammatically/testUIprogrammaticallyTests/SimulatorTests/BLEFriendSimulatorTests.swift"
+                  timestampString = "549426380.200484"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "144"
+                  endingLineNumber = "144"
+                  offsetFromSymbolStart = "33">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "testUIprogrammaticallyTests/SimulatorTests/BLEFriendSimulatorTests.swift"
+            timestampString = "549808393.108785"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "144"
+            endingLineNumber = "144"
+            landmarkName = "testreceiveBTmessage_compositetest_basic()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "testUIprogrammaticallyTests/SimulatorTests/BLEFriendSimulatorTests.swift"
+            timestampString = "549808393.1088769"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "147"
+            endingLineNumber = "147"
+            landmarkName = "testreceiveBTmessage_compositetest_basic()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "testUIprogrammaticallyTests/SimulatorTests/BLEFriendSimulatorTests.swift"
+            timestampString = "549808393.108968"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "226"
+            endingLineNumber = "226"
+            landmarkName = "testreadNVMCommands()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "testUIprogrammaticallyTests.BLEFriendSimulatorTests.testreadNVMCommands() -&gt; ()"
+                  moduleName = "testUIprogrammaticallyTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/kenmoynihan/Development/testUIprogrammatically/testUIprogrammaticallyTests/SimulatorTests/BLEFriendSimulatorTests.swift"
+                  timestampString = "549705117.495953"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "221"
+                  endingLineNumber = "221"
+                  offsetFromSymbolStart = "2493">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "implicit closure #10 : @autoclosure () throws -&gt; Swift.String in testUIprogrammaticallyTests.BLEFriendSimulatorTests.testreadNVMCommands() -&gt; ()"
+                  moduleName = "testUIprogrammaticallyTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/kenmoynihan/Development/testUIprogrammatically/testUIprogrammaticallyTests/SimulatorTests/BLEFriendSimulatorTests.swift"
+                  timestampString = "549705117.50038"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "221"
+                  endingLineNumber = "221"
+                  offsetFromSymbolStart = "14">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "implicit closure #11 : @autoclosure () throws -&gt; Swift.String in testUIprogrammaticallyTests.BLEFriendSimulatorTests.testreadNVMCommands() -&gt; ()"
+                  moduleName = "testUIprogrammaticallyTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/kenmoynihan/Development/testUIprogrammatically/testUIprogrammaticallyTests/SimulatorTests/BLEFriendSimulatorTests.swift"
+                  timestampString = "549705117.504916"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "221"
+                  endingLineNumber = "221"
+                  offsetFromSymbolStart = "4">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "testUIprogrammaticallyTests/SimulatorTests/BLEFriendSimulatorTests.swift"
+            timestampString = "549808393.109053"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "223"
+            endingLineNumber = "223"
+            landmarkName = "testreadNVMCommands()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "testUIprogrammaticallyTests.BLEFriendSimulatorTests.testreadNVMCommands() -&gt; ()"
+                  moduleName = "testUIprogrammaticallyTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/kenmoynihan/Development/testUIprogrammatically/testUIprogrammaticallyTests/SimulatorTests/BLEFriendSimulatorTests.swift"
+                  timestampString = "549705193.234803"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "218"
+                  endingLineNumber = "218"
+                  offsetFromSymbolStart = "1312">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "implicit closure #5 : @autoclosure () throws -&gt; Swift.Bool in testUIprogrammaticallyTests.BLEFriendSimulatorTests.testreadNVMCommands() -&gt; ()"
+                  moduleName = "testUIprogrammaticallyTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/kenmoynihan/Development/testUIprogrammatically/testUIprogrammaticallyTests/SimulatorTests/BLEFriendSimulatorTests.swift"
+                  timestampString = "549705193.238409"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "218"
+                  endingLineNumber = "218"
+                  offsetFromSymbolStart = "37">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "testUIprogrammaticallyTests/SimulatorTests/BLEFriendSimulatorTests.swift"
+            timestampString = "549808393.1091371"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "266"
+            endingLineNumber = "266"
+            landmarkName = "testwriteNVMCommands()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "testUIprogrammaticallyTests.BLEFriendSimulatorTests.testwriteNVMCommands() -&gt; ()"
+                  moduleName = "testUIprogrammaticallyTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/kenmoynihan/Development/testUIprogrammatically/testUIprogrammaticallyTests/SimulatorTests/BLEFriendSimulatorTests.swift"
+                  timestampString = "549705993.492628"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "261"
+                  endingLineNumber = "261"
+                  offsetFromSymbolStart = "2976">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "implicit closure #11 : @autoclosure () throws -&gt; Swift.Int in testUIprogrammaticallyTests.BLEFriendSimulatorTests.testwriteNVMCommands() -&gt; ()"
+                  moduleName = "testUIprogrammaticallyTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/kenmoynihan/Development/testUIprogrammatically/testUIprogrammaticallyTests/SimulatorTests/BLEFriendSimulatorTests.swift"
+                  timestampString = "549705993.495433"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "261"
+                  endingLineNumber = "261"
+                  offsetFromSymbolStart = "14">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "testUIprogrammaticallyTests/SimulatorTests/SimpleTextOnlySimulator_UARTTests.swift"
+            timestampString = "549808393.109217"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "34"
+            endingLineNumber = "34"
+            landmarkName = "testSimulatorReceiveString_empty()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
+</Bucket>

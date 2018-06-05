@@ -1,6 +1,8 @@
 # Podfile
 use_frameworks!
 
+pod 'MessagePack.swift', '~> 3.0'
+
 target 'testUIprogrammatically' do
     pod 'RxSwift',    '~> 4.0'
     pod 'RxCocoa',    '~> 4.0'

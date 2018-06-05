@@ -13,8 +13,19 @@
 		587F4EDC20B50428007C9416 /* testUIprogrammaticallyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 587F4EDB20B50428007C9416 /* testUIprogrammaticallyTests.swift */; };
 		587F4EE720B50428007C9416 /* testUIprogrammaticallyUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 587F4EE620B50428007C9416 /* testUIprogrammaticallyUITests.swift */; };
 		587F4EF720B5082E007C9416 /* SerialTextViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 587F4EF620B5082E007C9416 /* SerialTextViewController.swift */; };
-		587F4EF920B55108007C9416 /* SerialTextTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 587F4EF820B55108007C9416 /* SerialTextTableViewCell.swift */; };
-		58C2CA7920BA59D6006ACA97 /* SerialTextViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58C2CA7820BA59D5006ACA97 /* SerialTextViewModel.swift */; };
+		58A8712A20BA62FB00F83A41 /* SerialTextViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58A8712920BA62FB00F83A41 /* SerialTextViewModel.swift */; };
+		58A8712D20BA6ECE00F83A41 /* Simulator_UART.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58A8712C20BA6ECE00F83A41 /* Simulator_UART.swift */; };
+		58A8713020BA700100F83A41 /* SimulatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58A8712F20BA700100F83A41 /* SimulatorTests.swift */; };
+		58C2CA7F20BA61F3006ACA97 /* SerialTextViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58C2CA7E20BA61F3006ACA97 /* SerialTextViewModelTests.swift */; };
+		58EDC57420BE3E7F00CCCE77 /* DeviceSimulator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58EDC57320BE3E7F00CCCE77 /* DeviceSimulator.swift */; };
+		58EDC57620BE9A0800CCCE77 /* BLEFriendSimulatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58EDC57520BE9A0800CCCE77 /* BLEFriendSimulatorTests.swift */; };
+		58EDC57820BE9ADC00CCCE77 /* BLEFriendSimulator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58EDC57720BE9ADC00CCCE77 /* BLEFriendSimulator.swift */; };
+		58EDC57A20C3E0C600CCCE77 /* SimpleTextOnly_UARTDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58EDC57920C3E0C600CCCE77 /* SimpleTextOnly_UARTDelegate.swift */; };
+		58EDC57C20C3E27A00CCCE77 /* DeviceSimulatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58EDC57B20C3E27A00CCCE77 /* DeviceSimulatorTests.swift */; };
+		58EDC57E20C3EB6A00CCCE77 /* SimpleTextOnlySimulator_UARTTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58EDC57D20C3EB6A00CCCE77 /* SimpleTextOnlySimulator_UARTTests.swift */; };
+		58EDC58020C3EBDC00CCCE77 /* TestingUARTTextDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58EDC57F20C3EBDC00CCCE77 /* TestingUARTTextDelegate.swift */; };
+		9F1B9E12834AFA11877B995E /* Pods_testUIprogrammaticallyTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A667E4D121B1BD97459496A /* Pods_testUIprogrammaticallyTests.framework */; };
+		B5C0466E68112C55A93C16F3 /* Pods_testUIprogrammatically.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D1AAAF523D22F766422243C /* Pods_testUIprogrammatically.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,6 +46,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		04BEE79F43E1880049E0C64A /* Pods-testUIprogrammaticallyTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-testUIprogrammaticallyTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-testUIprogrammaticallyTests/Pods-testUIprogrammaticallyTests.release.xcconfig"; sourceTree = "<group>"; };
+		1711906D563C1861C66629F9 /* Pods-testUIprogrammatically.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-testUIprogrammatically.release.xcconfig"; path = "Pods/Target Support Files/Pods-testUIprogrammatically/Pods-testUIprogrammatically.release.xcconfig"; sourceTree = "<group>"; };
 		587F4EC320B50425007C9416 /* testUIprogrammatically.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = testUIprogrammatically.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		587F4EC620B50425007C9416 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		587F4EC820B50425007C9416 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -47,8 +60,21 @@
 		587F4EE620B50428007C9416 /* testUIprogrammaticallyUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = testUIprogrammaticallyUITests.swift; sourceTree = "<group>"; };
 		587F4EE820B50428007C9416 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		587F4EF620B5082E007C9416 /* SerialTextViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SerialTextViewController.swift; sourceTree = "<group>"; };
-		587F4EF820B55108007C9416 /* SerialTextTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SerialTextTableViewCell.swift; sourceTree = "<group>"; };
-		58C2CA7820BA59D5006ACA97 /* SerialTextViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SerialTextViewModel.swift; sourceTree = "<group>"; };
+		58A8712920BA62FB00F83A41 /* SerialTextViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SerialTextViewModel.swift; sourceTree = "<group>"; };
+		58A8712C20BA6ECE00F83A41 /* Simulator_UART.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Simulator_UART.swift; sourceTree = "<group>"; };
+		58A8712F20BA700100F83A41 /* SimulatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimulatorTests.swift; sourceTree = "<group>"; };
+		58C2CA7E20BA61F3006ACA97 /* SerialTextViewModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SerialTextViewModelTests.swift; sourceTree = "<group>"; };
+		58EDC57320BE3E7F00CCCE77 /* DeviceSimulator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceSimulator.swift; sourceTree = "<group>"; };
+		58EDC57520BE9A0800CCCE77 /* BLEFriendSimulatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLEFriendSimulatorTests.swift; sourceTree = "<group>"; };
+		58EDC57720BE9ADC00CCCE77 /* BLEFriendSimulator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLEFriendSimulator.swift; sourceTree = "<group>"; };
+		58EDC57920C3E0C600CCCE77 /* SimpleTextOnly_UARTDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleTextOnly_UARTDelegate.swift; sourceTree = "<group>"; };
+		58EDC57B20C3E27A00CCCE77 /* DeviceSimulatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceSimulatorTests.swift; sourceTree = "<group>"; };
+		58EDC57D20C3EB6A00CCCE77 /* SimpleTextOnlySimulator_UARTTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleTextOnlySimulator_UARTTests.swift; sourceTree = "<group>"; };
+		58EDC57F20C3EBDC00CCCE77 /* TestingUARTTextDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestingUARTTextDelegate.swift; sourceTree = "<group>"; };
+		6A667E4D121B1BD97459496A /* Pods_testUIprogrammaticallyTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_testUIprogrammaticallyTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6CF7D5AB27585C2875C92F80 /* Pods-testUIprogrammatically.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-testUIprogrammatically.debug.xcconfig"; path = "Pods/Target Support Files/Pods-testUIprogrammatically/Pods-testUIprogrammatically.debug.xcconfig"; sourceTree = "<group>"; };
+		9D1AAAF523D22F766422243C /* Pods_testUIprogrammatically.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_testUIprogrammatically.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		AB170ADC02A100AF5C7D4575 /* Pods-testUIprogrammaticallyTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-testUIprogrammaticallyTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-testUIprogrammaticallyTests/Pods-testUIprogrammaticallyTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +82,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B5C0466E68112C55A93C16F3 /* Pods_testUIprogrammatically.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -63,6 +90,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9F1B9E12834AFA11877B995E /* Pods_testUIprogrammaticallyTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -83,6 +111,8 @@
 				587F4EDA20B50428007C9416 /* testUIprogrammaticallyTests */,
 				587F4EE520B50428007C9416 /* testUIprogrammaticallyUITests */,
 				587F4EC420B50425007C9416 /* Products */,
+				BD0861AD99EDE9113A47CAA3 /* Pods */,
+				B4CF1CE2D17A13BFADB768DE /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -102,10 +132,10 @@
 				587F4EC620B50425007C9416 /* AppDelegate.swift */,
 				587F4EC820B50425007C9416 /* ViewController.swift */,
 				587F4EF620B5082E007C9416 /* SerialTextViewController.swift */,
-				58C2CA7820BA59D5006ACA97 /* SerialTextViewModel.swift */,
-				587F4EF820B55108007C9416 /* SerialTextTableViewCell.swift */,
+				58A8712920BA62FB00F83A41 /* SerialTextViewModel.swift */,
 				587F4ECD20B50428007C9416 /* Assets.xcassets */,
 				587F4ED220B50428007C9416 /* Info.plist */,
+				58A8712B20BA6E3B00F83A41 /* Bluetooth Device Simulator */,
 			);
 			path = testUIprogrammatically;
 			sourceTree = "<group>";
@@ -113,6 +143,8 @@
 		587F4EDA20B50428007C9416 /* testUIprogrammaticallyTests */ = {
 			isa = PBXGroup;
 			children = (
+				58A8712E20BA6FDF00F83A41 /* SimulatorTests */,
+				58C2CA7E20BA61F3006ACA97 /* SerialTextViewModelTests.swift */,
 				587F4EDB20B50428007C9416 /* testUIprogrammaticallyTests.swift */,
 				587F4EDD20B50428007C9416 /* Info.plist */,
 			);
@@ -128,6 +160,49 @@
 			path = testUIprogrammaticallyUITests;
 			sourceTree = "<group>";
 		};
+		58A8712B20BA6E3B00F83A41 /* Bluetooth Device Simulator */ = {
+			isa = PBXGroup;
+			children = (
+				58A8712C20BA6ECE00F83A41 /* Simulator_UART.swift */,
+				58EDC57920C3E0C600CCCE77 /* SimpleTextOnly_UARTDelegate.swift */,
+				58EDC57320BE3E7F00CCCE77 /* DeviceSimulator.swift */,
+				58EDC57720BE9ADC00CCCE77 /* BLEFriendSimulator.swift */,
+			);
+			path = "Bluetooth Device Simulator";
+			sourceTree = "<group>";
+		};
+		58A8712E20BA6FDF00F83A41 /* SimulatorTests */ = {
+			isa = PBXGroup;
+			children = (
+				58A8712F20BA700100F83A41 /* SimulatorTests.swift */,
+				58EDC57D20C3EB6A00CCCE77 /* SimpleTextOnlySimulator_UARTTests.swift */,
+				58EDC57B20C3E27A00CCCE77 /* DeviceSimulatorTests.swift */,
+				58EDC57520BE9A0800CCCE77 /* BLEFriendSimulatorTests.swift */,
+				58EDC57F20C3EBDC00CCCE77 /* TestingUARTTextDelegate.swift */,
+			);
+			path = SimulatorTests;
+			sourceTree = "<group>";
+		};
+		B4CF1CE2D17A13BFADB768DE /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				9D1AAAF523D22F766422243C /* Pods_testUIprogrammatically.framework */,
+				6A667E4D121B1BD97459496A /* Pods_testUIprogrammaticallyTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		BD0861AD99EDE9113A47CAA3 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				6CF7D5AB27585C2875C92F80 /* Pods-testUIprogrammatically.debug.xcconfig */,
+				1711906D563C1861C66629F9 /* Pods-testUIprogrammatically.release.xcconfig */,
+				AB170ADC02A100AF5C7D4575 /* Pods-testUIprogrammaticallyTests.debug.xcconfig */,
+				04BEE79F43E1880049E0C64A /* Pods-testUIprogrammaticallyTests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -135,9 +210,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 587F4EEB20B50428007C9416 /* Build configuration list for PBXNativeTarget "testUIprogrammatically" */;
 			buildPhases = (
+				73D99C00F181629255764476 /* [CP] Check Pods Manifest.lock */,
 				587F4EBF20B50425007C9416 /* Sources */,
 				587F4EC020B50425007C9416 /* Frameworks */,
 				587F4EC120B50425007C9416 /* Resources */,
+				3A1B728DAA2B99257830FF37 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -152,9 +229,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 587F4EEE20B50428007C9416 /* Build configuration list for PBXNativeTarget "testUIprogrammaticallyTests" */;
 			buildPhases = (
+				407A0FAB07E568427B854D38 /* [CP] Check Pods Manifest.lock */,
 				587F4ED320B50428007C9416 /* Sources */,
 				587F4ED420B50428007C9416 /* Frameworks */,
 				587F4ED520B50428007C9416 /* Resources */,
+				EDC1DF02AD7B5E3715CCF72B /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -252,15 +331,103 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		3A1B728DAA2B99257830FF37 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-testUIprogrammatically/Pods-testUIprogrammatically-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/MessagePack.swift/MessagePack.framework",
+				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
+				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MessagePack.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-testUIprogrammatically/Pods-testUIprogrammatically-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		407A0FAB07E568427B854D38 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-testUIprogrammaticallyTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		73D99C00F181629255764476 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-testUIprogrammatically-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		EDC1DF02AD7B5E3715CCF72B /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-testUIprogrammaticallyTests/Pods-testUIprogrammaticallyTests-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/MessagePack.swift/MessagePack.framework",
+				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/RxBlocking/RxBlocking.framework",
+				"${BUILT_PRODUCTS_DIR}/RxTest/RxTest.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MessagePack.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxBlocking.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxTest.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-testUIprogrammaticallyTests/Pods-testUIprogrammaticallyTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		587F4EBF20B50425007C9416 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				587F4EF920B55108007C9416 /* SerialTextTableViewCell.swift in Sources */,
 				587F4EF720B5082E007C9416 /* SerialTextViewController.swift in Sources */,
-				58C2CA7920BA59D6006ACA97 /* SerialTextViewModel.swift in Sources */,
+				58EDC57820BE9ADC00CCCE77 /* BLEFriendSimulator.swift in Sources */,
+				58A8712A20BA62FB00F83A41 /* SerialTextViewModel.swift in Sources */,
+				58A8712D20BA6ECE00F83A41 /* Simulator_UART.swift in Sources */,
 				587F4EC920B50425007C9416 /* ViewController.swift in Sources */,
+				58EDC57A20C3E0C600CCCE77 /* SimpleTextOnly_UARTDelegate.swift in Sources */,
+				58EDC57420BE3E7F00CCCE77 /* DeviceSimulator.swift in Sources */,
 				587F4EC720B50425007C9416 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -270,6 +437,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				587F4EDC20B50428007C9416 /* testUIprogrammaticallyTests.swift in Sources */,
+				58A8713020BA700100F83A41 /* SimulatorTests.swift in Sources */,
+				58EDC57620BE9A0800CCCE77 /* BLEFriendSimulatorTests.swift in Sources */,
+				58EDC57E20C3EB6A00CCCE77 /* SimpleTextOnlySimulator_UARTTests.swift in Sources */,
+				58EDC58020C3EBDC00CCCE77 /* TestingUARTTextDelegate.swift in Sources */,
+				58C2CA7F20BA61F3006ACA97 /* SerialTextViewModelTests.swift in Sources */,
+				58EDC57C20C3E27A00CCCE77 /* DeviceSimulatorTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -413,6 +586,7 @@
 		};
 		587F4EEC20B50428007C9416 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6CF7D5AB27585C2875C92F80 /* Pods-testUIprogrammatically.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -430,6 +604,7 @@
 		};
 		587F4EED20B50428007C9416 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1711906D563C1861C66629F9 /* Pods-testUIprogrammatically.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -447,6 +622,7 @@
 		};
 		587F4EEF20B50428007C9416 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = AB170ADC02A100AF5C7D4575 /* Pods-testUIprogrammaticallyTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -467,6 +643,7 @@
 		};
 		587F4EF020B50428007C9416 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 04BEE79F43E1880049E0C64A /* Pods-testUIprogrammaticallyTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";

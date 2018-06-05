@@ -9,7 +9,9 @@
 import UIKit
 
 class ViewController: UIViewController {
-
+    
+    let serialViewController = SerialTextViewController()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -24,9 +26,8 @@ class ViewController: UIViewController {
     // called by gesture recognizer
     @objc func tapHandler(gesture: UITapGestureRecognizer) {
         
-        let serialViewController = SerialTextViewController()
-       // self.navigationController?.pushViewController(serialViewController, animated: true)
-        
+        //NEED TO SETUP ALL CONSTRAINTS
+       // assert(false)
         if  gesture.state == .ended
         {
             if self.navigationController?.pushViewController(serialViewController, animated: true) == nil
@@ -34,8 +35,22 @@ class ViewController: UIViewController {
                 print("ERROR")
                 assert(false)
             }
+           // setConstraints();
         }
     }
+    
+    /*func setConstraints()
+    {
+        serialViewController.view.translatesAutoresizingMaskIntoConstraints = false
+        if let nav = self.navigationController
+        {
+            serialViewController.view.leadingAnchor.constraint(equalTo: nav.view.safeAreaLayoutGuide.leadingAnchor).isActive = true
+            serialViewController.view.trailingAnchor.constraint(equalTo: nav.view.trailingAnchor).isActive = true
+            serialViewController.view.topAnchor.constraint(equalTo: nav.view.topAnchor).isActive = true
+            serialViewController.view.bottomAnchor.constraint(equalTo: nav.view.bottomAnchor).isActive = true
+        }
+    
+    }*/
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
