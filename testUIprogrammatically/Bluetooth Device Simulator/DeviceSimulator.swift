@@ -9,16 +9,7 @@
 import Foundation
 
 
-class DeviceSimulator : Simulator_UART
+class DeviceSimulator 
 {
-    
-    
-    
-    
-    enum DeviceState { case deepSleep, waking, talking, transmitting }
-    var currentState = DeviceState.deepSleep
-    
-    
-    var currentUnitTime = Date.init(timeIntervalSince1970: 123) //initialise to nothing
-    
+
 }

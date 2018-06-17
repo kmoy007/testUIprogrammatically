@@ -25,8 +25,8 @@ class BLEFriendSimulatorTests: XCTestCase {
         
         let theSubject = BLEFriendSimulator()
         
-        XCTAssertEqual(theSubject.connectionMode, BLEFriendSimulator.BLEMode.command)
-        XCTAssertEqual(theSubject.connectionState, BLEFriendSimulator.BLEState.disconnected)
+        XCTAssertEqual(theSubject.connectionMode, BLEMode.command)
+        XCTAssertEqual(theSubject.connectionState, BLEState.disconnected)
         XCTAssert(theSubject.delegate == nil)
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
@@ -35,41 +35,41 @@ class BLEFriendSimulatorTests: XCTestCase {
     func testToggleMode() {
         
         let theSubject = BLEFriendSimulator()
-        XCTAssertEqual(theSubject.connectionMode, BLEFriendSimulator.BLEMode.command)
+        XCTAssertEqual(theSubject.connectionMode, BLEMode.command)
         theSubject.toggleMode();
-        XCTAssertEqual(theSubject.connectionMode, BLEFriendSimulator.BLEMode.data)
+        XCTAssertEqual(theSubject.connectionMode, BLEMode.data)
         theSubject.toggleMode();
-        XCTAssertEqual(theSubject.connectionMode, BLEFriendSimulator.BLEMode.command)
+        XCTAssertEqual(theSubject.connectionMode, BLEMode.command)
     }
     
     func testfilterForToggleMode_empty() {
         let theSubject = BLEFriendSimulator()
-        XCTAssertEqual(theSubject.connectionMode, BLEFriendSimulator.BLEMode.command)
+        XCTAssertEqual(theSubject.connectionMode, BLEMode.command)
         
         theSubject.ATCommandFilter(incomingMessage: "".data(using: .utf8)!)
-        XCTAssertEqual(theSubject.connectionMode, BLEFriendSimulator.BLEMode.command)  //no change
+        XCTAssertEqual(theSubject.connectionMode, BLEMode.command)  //no change
 //        XCTAssertEqual(result, false)  //no change
     }
     
     func testfilterForToggleMode_NoToggleButOtherStringsPassThrough() {
         let theSubject = BLEFriendSimulator()
-        XCTAssertEqual(theSubject.connectionMode, BLEFriendSimulator.BLEMode.command)
+        XCTAssertEqual(theSubject.connectionMode, BLEMode.command)
         
         theSubject.ATCommandFilter(incomingMessage: "+++Hello++".data(using: .utf8)!)
-        XCTAssertEqual(theSubject.connectionMode, BLEFriendSimulator.BLEMode.command)  //no change
+        XCTAssertEqual(theSubject.connectionMode, BLEMode.command)  //no change
 //        XCTAssertEqual(result1, false)  //no change
 
         theSubject.ATCommandFilter(incomingMessage: "srt".data(using: .utf8)!) //short
-        XCTAssertEqual(theSubject.connectionMode, BLEFriendSimulator.BLEMode.command)  //no change
+        XCTAssertEqual(theSubject.connectionMode, BLEMode.command)  //no change
 //        XCTAssertEqual(result2, false)  //no change
     }
     
     func testfilterForToggleMode_withToggle() {
         let theSubject = BLEFriendSimulator()
-        XCTAssertEqual(theSubject.connectionMode, BLEFriendSimulator.BLEMode.command)
+        XCTAssertEqual(theSubject.connectionMode, BLEMode.command)
         
         theSubject.ATCommandFilter(incomingMessage: "+++\n".data(using: .utf8)!)
-        XCTAssertEqual(theSubject.connectionMode, BLEFriendSimulator.BLEMode.data)  //simple toggle, empty return
+        XCTAssertEqual(theSubject.connectionMode, BLEMode.data)  //simple toggle, empty return
    //     XCTAssertEqual(result1, true)
         
  /*       let result2 = theSubject.filterForToggleMode(incomingMessage: "+++\nblah".utf8CString) //with return
@@ -110,68 +110,66 @@ class BLEFriendSimulatorTests: XCTestCase {
         XCTAssertEqual(theSubject.incomingBuffer, "moreStuff\nAndAgain".data(using: .utf8)!)
     }
     
-    class MockUART : UART
+    class MockMessageFormattingBuffer : SendMessageFormattingBuffer
     {
-        func sendStringUpstream(stringToSend: Data) {
-            assert(false) //not implemented
-        }
+        var messageDestination: ReceiveMessageDelegate?
         
-        var upstreamDelegate: UARTTextDelegate?
-        var downstreamDelegate: UARTTextDelegate?
-        
-        func sendStringDownstream(stringToSend: Data) {
+        func formatAndSendData(stringToSend: Data) {
             receivedDataAsString.append(stringToSend)
-            //delegate?.receiveStringFromDevice(receive: stringToSend)
+            messageDestination?.receiveStringFromUART(receive: stringToSend)
         }
         
         var receivedDataAsString = [Data]()
     }
     
     func testreceiveBTmessage_compositetest_basic() {
-        let mockUARTDevice = MockUART()
+        let mockMessageFormattingBuffer = MockMessageFormattingBuffer()
         let theSubject = BLEFriendSimulator()
-        theSubject.uartDevice = mockUARTDevice
+        
+        XCTAssertNotNil(theSubject.attachedDevice)
+        
+        theSubject.attachedDevice = mockMessageFormattingBuffer
         
         theSubject.toggleMode()
-        XCTAssertEqual(theSubject.connectionMode, BLEFriendSimulator.BLEMode.data)
+        XCTAssertEqual(theSubject.connectionMode, BLEMode.data)
        
-        theSubject.receiveBTmessage(incomingMessage: "".data(using: .utf8)!)
-        XCTAssertEqual(mockUARTDevice.receivedDataAsString.count, 0)
+        theSubject.receiveStringFromUART(receive: "".data(using: .utf8)!)
+        XCTAssertEqual(mockMessageFormattingBuffer.receivedDataAsString.count, 0)
         
-        theSubject.receiveBTmessage(incomingMessage: "test".data(using: .utf8)!)
-        XCTAssertEqual(mockUARTDevice.receivedDataAsString.count, 0)
+        theSubject.receiveStringFromUART(receive: "test".data(using: .utf8)!)
+        XCTAssertEqual(mockMessageFormattingBuffer.receivedDataAsString.count, 0)
         
-        theSubject.receiveBTmessage(incomingMessage: "ing\n".data(using: .utf8)!)
-        XCTAssertEqual(mockUARTDevice.receivedDataAsString.count, 1)
-        XCTAssertEqual(mockUARTDevice.receivedDataAsString[0], "testing\n".data(using: .utf8)!)
+        theSubject.receiveStringFromUART(receive: "ing\n".data(using: .utf8)!)
+        XCTAssertEqual(mockMessageFormattingBuffer.receivedDataAsString.count, 1)
+        XCTAssertEqual(mockMessageFormattingBuffer.receivedDataAsString[0], "testing\n".data(using: .utf8)!)
         
-        theSubject.receiveBTmessage(incomingMessage: "myname\nisken\nhello".data(using: .utf8)!)
-        XCTAssertEqual(mockUARTDevice.receivedDataAsString.count, 3)
-        XCTAssertEqual(mockUARTDevice.receivedDataAsString[0], "testing\n".data(using: .utf8)!)
-        XCTAssertEqual(mockUARTDevice.receivedDataAsString[1], "myname\n".data(using: .utf8)!)
-        XCTAssertEqual(mockUARTDevice.receivedDataAsString[2], "isken\n".data(using: .utf8)!)
+        theSubject.receiveStringFromUART(receive: "myname\nisken\nhello".data(using: .utf8)!)
+        XCTAssertEqual(mockMessageFormattingBuffer.receivedDataAsString.count, 3)
+        XCTAssertEqual(mockMessageFormattingBuffer.receivedDataAsString[0], "testing\n".data(using: .utf8)!)
+        XCTAssertEqual(mockMessageFormattingBuffer.receivedDataAsString[1], "myname\n".data(using: .utf8)!)
+        XCTAssertEqual(mockMessageFormattingBuffer.receivedDataAsString[2], "isken\n".data(using: .utf8)!)
         
-        theSubject.receiveBTmessage(incomingMessage: "\n".data(using: .utf8)!)
-        XCTAssertEqual(mockUARTDevice.receivedDataAsString.count, 4)
-        XCTAssertEqual(mockUARTDevice.receivedDataAsString[3], "hello\n".data(using: .utf8)!)
+        theSubject.receiveStringFromUART(receive: "\n".data(using: .utf8)!)
+        XCTAssertEqual(mockMessageFormattingBuffer.receivedDataAsString.count, 4)
+        XCTAssertEqual(mockMessageFormattingBuffer.receivedDataAsString[3], "hello\n".data(using: .utf8)!)
         
-        theSubject.receiveBTmessage(incomingMessage: "hello+++\n".data(using: .utf8)!)
-        XCTAssertEqual(mockUARTDevice.receivedDataAsString.count, 5)
-        XCTAssertEqual(mockUARTDevice.receivedDataAsString[4], "hello+++\n".data(using: .utf8)!)
+        theSubject.receiveStringFromUART(receive: "hello+++\n".data(using: .utf8)!)
+        XCTAssertEqual(mockMessageFormattingBuffer.receivedDataAsString.count, 5)
+        XCTAssertEqual(mockMessageFormattingBuffer.receivedDataAsString[4], "hello+++\n".data(using: .utf8)!)
         
-        XCTAssertEqual(theSubject.connectionMode, BLEFriendSimulator.BLEMode.data)
-        theSubject.receiveBTmessage(incomingMessage: "+++\n".data(using: .utf8)!)
-        XCTAssertEqual(mockUARTDevice.receivedDataAsString.count, 5) //NO NEW STRING - Consumed as AT command
-        XCTAssertEqual(theSubject.connectionMode, BLEFriendSimulator.BLEMode.command)
+        XCTAssertEqual(theSubject.connectionMode, BLEMode.data)
+        theSubject.receiveStringFromUART(receive: "+++\n".data(using: .utf8)!)
+        XCTAssertEqual(mockMessageFormattingBuffer.receivedDataAsString.count, 5) //NO NEW STRING - Consumed as AT command
+        XCTAssertEqual(theSubject.connectionMode, BLEMode.command)
 
-        theSubject.receiveBTmessage(incomingMessage: "helloagain\n".data(using: .utf8)!)
-        XCTAssertEqual(mockUARTDevice.receivedDataAsString.count, 5) //NO NEW STRING - Consumed as AT command
+        theSubject.receiveStringFromUART(receive: "helloagain\n".data(using: .utf8)!)
+        XCTAssertEqual(mockMessageFormattingBuffer.receivedDataAsString.count, 5) //NO NEW STRING - Consumed as AT command
         
-        theSubject.receiveBTmessage(incomingMessage: "+++\n".data(using: .utf8)!)
-        theSubject.receiveBTmessage(incomingMessage: "lasttry\n".data(using: .utf8)!)
-        XCTAssertEqual(theSubject.connectionMode, BLEFriendSimulator.BLEMode.data)
-        XCTAssertEqual(mockUARTDevice.receivedDataAsString.count, 6)
-        XCTAssertEqual(mockUARTDevice.receivedDataAsString[5], "lasttry\n".data(using: .utf8)!)
+        theSubject.receiveStringFromUART(receive: "+++\n".data(using: .utf8)!)
+        theSubject.receiveStringFromUART(receive: "lasttry\n".data(using: .utf8)!)
+        XCTAssertEqual(theSubject.connectionMode, BLEMode.data)
+        XCTAssertEqual(mockMessageFormattingBuffer.receivedDataAsString.count, 6)
+        XCTAssertEqual(mockMessageFormattingBuffer.receivedDataAsString[5], "lasttry\n".data(using: .utf8)!)
     }
     
     func testsplitNVMCommands()
@@ -199,11 +197,11 @@ class BLEFriendSimulatorTests: XCTestCase {
 
     }
     
-    class MockBLEFriendSimulatorDelegate : BLEFriendSimulatorDelegate
+    class MockBLEFriendSimulatorDelegate : ReceiveMessageDelegate
     {
-        func receiveMessageOverBLE(receivedData: Data)
+        func receiveStringFromUART(receive: Data)
         {
-            receivedStrings.append(String(data: receivedData, encoding: .utf8)!)
+            receivedStrings.append(String(data: receive, encoding: .utf8)!)
         }
         
         var receivedStrings = [String]()

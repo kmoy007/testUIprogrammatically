@@ -11,7 +11,7 @@ import UIKit
 class SerialTextViewController: UIViewController, UITextFieldDelegate
 {
     let viewModel = SerialTextViewModel()
-    let simulator = SimpleTextOnly_UARTDelegate()
+    let simulator = SimpleTextOnly_MessageDelegate()
 
     var multiLineTextView : UITextView = UITextView()
 
@@ -32,8 +32,8 @@ class SerialTextViewController: UIViewController, UITextFieldDelegate
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.white;
         viewModel.serialTextView = self;
-        viewModel.theUart = Simulator_UART()
-        viewModel.theUart?.downstreamDelegate = SimpleTextOnly_UARTDelegate()
+        viewModel.messageSink = BLEFriend_SendMessageFormattingBuffer()
+        viewModel.messageSink?.messageDestination = SimpleTextOnly_MessageDelegate()
         
         scrollViewSetup()
         textViewSetup()

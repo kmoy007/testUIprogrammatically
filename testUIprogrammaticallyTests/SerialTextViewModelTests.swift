@@ -20,7 +20,7 @@ class SerialTextViewModelTests: XCTestCase {
     
     override func tearDown() {
         theSubject.theStrings = [String]()
-        theSubject.theUart = nil
+        theSubject.messageSink = nil
         // Put teardown code here. This method is called after the invocation of each test method in the class.
         super.tearDown()
     }
@@ -86,32 +86,29 @@ class SerialTextViewModelTests: XCTestCase {
         XCTAssert(theSubject.theStrings[2] == "second new line here")
     }
     
-    class MockUART : UART
+    class MockMessageFormattingBuffer : SendMessageFormattingBuffer
     {
-        func sendStringUpstream(stringToSend: Data) {
-            assert(false)
-        }
+        var messageDestination: ReceiveMessageDelegate?
         
-        var upstreamDelegate: UARTTextDelegate?
-        var downstreamDelegate: UARTTextDelegate?
-        var theStrings = [String]()
-        
-        func sendStringDownstream(stringToSend: Data) {
+        func formatAndSendData(stringToSend: Data) {
             theStrings.append(String(data: stringToSend, encoding: .utf8)!)
+            
+       //     assert(messageDestination == nil) //not sure if this is important or not
         }
         
+        var theStrings = [String]()
     }
     
     func testAttachDelegate()
     {
-        XCTAssert(theSubject.theUart == nil)  //no UART attached
+        XCTAssert(theSubject.messageSink == nil)  //no UART attached
         
-        let mockUART = MockUART()
-        theSubject.theUart = mockUART
+        let mockmessageSink = MockMessageFormattingBuffer()
+        theSubject.messageSink = mockmessageSink
         
-        XCTAssert(theSubject.theUart === mockUART)  //uncontroversial
+        XCTAssert(theSubject.messageSink === mockmessageSink)  //uncontroversial
         
-        XCTAssert(theSubject === mockUART.upstreamDelegate)  //this is the important checl
+        XCTAssert(theSubject === mockmessageSink.messageDestination)  //this is the important checl
     }
     
     func testsendStringFromUser_normal()
@@ -119,18 +116,18 @@ class SerialTextViewModelTests: XCTestCase {
         theSubject.sendStringFromUser(send: "")
         XCTAssert(theSubject.theStrings.count == 0)  //no UART attached
         
-        let mockUART = MockUART()
-        theSubject.theUart = mockUART
+        let mockmessageSink = MockMessageFormattingBuffer()
+        theSubject.messageSink = mockmessageSink
         
         theSubject.sendStringFromUser(send: "")
         XCTAssertEqual(theSubject.theStrings.count, 0)  //nothing received
         
-        XCTAssertEqual(mockUART.theStrings.count, 1)
-        XCTAssertEqual(mockUART.theStrings[0], "")
+        XCTAssertEqual(mockmessageSink.theStrings.count, 1)
+        XCTAssertEqual(mockmessageSink.theStrings[0], "")
         
         theSubject.sendStringFromUser(send: "abcdefghijklmnopqrstuvwxy\n1234")
-        XCTAssertEqual(mockUART.theStrings.count, 2)
-        XCTAssertEqual(mockUART.theStrings[1], "abcdefghijklmnopqrstuvwxy\n1234")
+        XCTAssertEqual(mockmessageSink.theStrings.count, 2)
+        XCTAssertEqual(mockmessageSink.theStrings[1], "abcdefghijklmnopqrstuvwxy\n1234")
         
     }
     
@@ -139,13 +136,13 @@ class SerialTextViewModelTests: XCTestCase {
         theSubject.sendStringFromUser(send: "")
         XCTAssert(theSubject.theStrings.count == 0)  //no UART attached
         
-        let mockUART = MockUART()
-        theSubject.theUart = mockUART
+        let mockmessageSink = MockMessageFormattingBuffer()
+        theSubject.messageSink = mockmessageSink
         
         theSubject.sendStringFromUser(send: "ˆ¶ˍƒ©˚©ððß´ƒ-ºthings")
         // now it pops up a dialogbox, but this isn't testing for it.
-        XCTAssert(mockUART.theStrings.count == 1)  //UART attached, empty string sent
-        XCTAssertEqual(mockUART.theStrings[0], "ˆ¶ˍƒ©˚©ððß´ƒ-ºthings")
+        XCTAssert(mockmessageSink.theStrings.count == 1)  //UART attached, empty string sent
+        XCTAssertEqual(mockmessageSink.theStrings[0], "ˆ¶ˍƒ©˚©ððß´ƒ-ºthings")
         
         XCTAssert(false) //once we decouple the UI we can test the error message
     }

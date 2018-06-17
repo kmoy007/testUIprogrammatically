@@ -9,9 +9,9 @@
 import XCTest
 @testable import testUIprogrammatically
 
-class SimulatorTests: XCTestCase {
+class BLEFriend_MessageFormatterTests: XCTestCase {
     
-    let theSubject = Simulator_UART() ;
+    let theSubject = BLEFriend_SendMessageFormattingBuffer() ;
     
     override func setUp() {
         super.setUp()
@@ -20,7 +20,7 @@ class SimulatorTests: XCTestCase {
     
     override func tearDown() {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
-        theSubject.upstreamDelegate = nil
+        theSubject.messageDestination = nil
         
         super.tearDown()
     }
@@ -73,10 +73,10 @@ class SimulatorTests: XCTestCase {
     
     func testSimulatorSendString_NoDelegate()
     {
-        XCTAssertNil(theSubject.upstreamDelegate)
-        theSubject.sendStringUpstream(stringToSend: "hello".data(using: .utf8)!)
+        XCTAssertNil(theSubject.messageDestination)
+        theSubject.formatAndSendData(stringToSend: "hello".data(using: .utf8)!)
         //should crash if optional not handled correctly
-        XCTAssertNil(theSubject.upstreamDelegate)
+        XCTAssertNil(theSubject.messageDestination)
     }
     
    
@@ -86,14 +86,14 @@ class SimulatorTests: XCTestCase {
         let forTestDelegate = TestingUARTTextDelegate();
         
         
-        XCTAssertNil(theSubject.upstreamDelegate)
-        theSubject.upstreamDelegate = forTestDelegate;
-        theSubject.sendStringUpstream(stringToSend: "hello".data(using: .utf8)!)
+        XCTAssertNil(theSubject.messageDestination)
+        theSubject.messageDestination = forTestDelegate;
+        theSubject.formatAndSendData(stringToSend: "hello".data(using: .utf8)!)
         XCTAssertEqual(forTestDelegate.receivedCount, 1)
         XCTAssertEqual(forTestDelegate.receivedStrings[0], "hello")
         
         //larger test - multi line
-        theSubject.sendStringUpstream(stringToSend: "000000000011111111112222222".data(using: .utf8)!)
+        theSubject.formatAndSendData(stringToSend: "000000000011111111112222222".data(using: .utf8)!)
         XCTAssertEqual(forTestDelegate.receivedCount, 3)
         XCTAssertEqual(forTestDelegate.receivedStrings[0], "hello")
         XCTAssertEqual(forTestDelegate.receivedStrings[1], "00000000001111111111")

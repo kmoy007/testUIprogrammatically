@@ -11,13 +11,13 @@ import RxSwift
 import RxCocoa
 
 
-class SerialTextViewModel : UARTTextDelegate
+class SerialTextViewModel : ReceiveMessageDelegate
 {
     weak var serialTextView : SerialTextViewController? // for now - this needs to be replaced with RxSwift Observer pattern
     
-    var theUart : UART? {
+    var messageSink : SendMessageFormattingBuffer? {
         didSet {
-            theUart?.upstreamDelegate = self //autowire - cant be ! because tests reset to nil
+            messageSink?.messageDestination = self //autowire - cant be ! because tests reset to nil
         }
     }
     var theStrings = [String]()
@@ -34,9 +34,9 @@ class SerialTextViewModel : UARTTextDelegate
             //error
         }
         
-        if theUart != nil
+        if messageSink != nil
         {
-            theUart?.sendStringDownstream(stringToSend: send.data(using: .utf8)!);
+            messageSink?.formatAndSendData(stringToSend: send.data(using: .utf8)!);
         }
         
         //self.sendString(sendUTF8String: sendUTF8String)
@@ -44,9 +44,9 @@ class SerialTextViewModel : UARTTextDelegate
         
     }
     
-    func receiveStringFromUART(receive: String)
+    func receiveStringFromUART(receive: Data)
     {
-        self.addIncomingString_WithCorrectFormatting(receivedString: String(receive))
+        self.addIncomingString_WithCorrectFormatting(receivedString: String(data: receive, encoding: .utf8)!)
         serialTextView?.textViewSetupSizeForWordWrapping() //recalculate widths etc..
     }
     

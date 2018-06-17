@@ -8,27 +8,23 @@
 
 import Foundation
 
-protocol BLEFriendSimulatorDelegate : class
-{
-    func receiveMessageOverBLE(receivedData : Data)
-}
+enum BLEState { case disconnected, connected }
+enum BLEMode { case command, data }
 
-class BLEFriendSimulator : UARTTextDelegate
+class BLEFriendSimulator : ReceiveMessageDelegate
 {
-    var theUart: UART?
+    var messageSink: SendMessageFormattingBuffer?
     
-    func receiveStringFromUART(receive: String) {
-        //SOMETHING HERE
-    }
-    
-    enum BLEState { case disconnected, connected }
-    enum BLEMode { case command, data }
+//    enum BLEState { case disconnected, connected }
+  //  enum BLEMode { case command, data }
     
     var connectionState = BLEState.disconnected
     var connectionMode = BLEMode.command
     
-    var delegate : BLEFriendSimulatorDelegate?
-    var uartDevice : UART?
+    var delegate : ReceiveMessageDelegate?
+    
+    
+    var attachedDevice : SendMessageFormattingBuffer = DoNothingSendMessageFormattingBuffer() //not a let for unit tests
     
     var incomingBuffer = Data()
     
@@ -45,9 +41,9 @@ class BLEFriendSimulator : UARTTextDelegate
         return returnData;
     }
     
-    func receiveBTmessage(incomingMessage : Data)
+    func receiveStringFromUART(receive : Data)
     {
-        incomingBuffer = incomingBuffer + incomingMessage;
+        incomingBuffer = incomingBuffer + receive;
         while let nextString = getNextStringTokenizedBynewline(dataIn: &incomingBuffer)
         {
             if (specialCaseModeToggle(incomingMessage: nextString))
@@ -62,7 +58,7 @@ class BLEFriendSimulator : UARTTextDelegate
             }
             else //(connectionMode == .data)
             {
-                uartDevice?.sendStringDownstream(stringToSend: nextString)
+                attachedDevice.formatAndSendData(stringToSend: nextString)
             }
         }
     }
@@ -100,7 +96,7 @@ class BLEFriendSimulator : UARTTextDelegate
     {
         if let parameters = splitNVMCommands(incomingMessage: incomingMessage)
         {
-            delegate?.receiveMessageOverBLE(receivedData: NVRam)
+            delegate?.receiveStringFromUART(receive: NVRam)
             return true
         }
         return false
@@ -135,18 +131,18 @@ class BLEFriendSimulator : UARTTextDelegate
                 {
                     if atcommand.1(incomingMessage)
                     {
-                        delegate?.receiveMessageOverBLE(receivedData: "OK\r\n".data(using: .utf8)!)
+                        delegate?.receiveStringFromUART(receive: "OK\r\n".data(using: .utf8)!)
                     }
                     else
                     {
-                        delegate?.receiveMessageOverBLE(receivedData: "ERROR\r\n".data(using: .utf8)!)
+                        delegate?.receiveStringFromUART(receive: "ERROR\r\n".data(using: .utf8)!)
                     }
                    // delegate?.receiveMessageOverBLE(receivedData: "OK\r\n".data(using: .utf8)!)
                     return;
                 }
             }
         }
-        delegate?.receiveMessageOverBLE(receivedData: "ERROR\r\n".data(using: .utf8)!)
+        delegate?.receiveStringFromUART(receive: "ERROR\r\n".data(using: .utf8)!)
     }
     
     func toggleMode(redundantString: Data = Data()) -> Bool
