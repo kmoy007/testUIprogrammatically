@@ -66,11 +66,21 @@ class BLEFriendSimulatorTests: XCTestCase {
     
     func testfilterForToggleMode_withToggle() {
         let theSubject = BLEFriendSimulator()
+        let theDelegate = MockBLEFriendSimulatorDelegate();
+        theSubject.delegate = theDelegate;
+        
         XCTAssertEqual(theSubject.connectionMode, BLEMode.command)
         
         theSubject.ATCommandFilter(incomingMessage: "+++\n".data(using: .utf8)!)
         XCTAssertEqual(theSubject.connectionMode, BLEMode.data)  //simple toggle, empty return
-   //     XCTAssertEqual(result1, true)
+        XCTAssertEqual(theDelegate.receivedStrings.count, 1)
+        XCTAssertEqual(theDelegate.receivedStrings[0], "OK\r\n")
+        
+        theSubject.ATCommandFilter(incomingMessage: "+++\n".data(using: .utf8)!)
+        XCTAssertEqual(theSubject.connectionMode, BLEMode.command)  //simple toggle, empty return
+        XCTAssertEqual(theDelegate.receivedStrings.count, 2)
+        XCTAssertEqual(theDelegate.receivedStrings[1], "OK\r\n")
+        
         
  /*       let result2 = theSubject.filterForToggleMode(incomingMessage: "+++\nblah".utf8CString) //with return
         XCTAssertEqual(theSubject.connectionMode, BLEFriendSimulator.BLEMode.command)
@@ -82,33 +92,7 @@ class BLEFriendSimulatorTests: XCTestCase {
  */
     }
     
-    func testgetNextStringTokenizedBynewline() {
-        let theSubject = BLEFriendSimulator()
-        XCTAssertEqual(theSubject.incomingBuffer, "".data(using: .utf8)!)
-        let result1 = theSubject.getNextStringTokenizedBynewline(dataIn: &theSubject.incomingBuffer)
-        XCTAssertEqual(result1, nil)
-        XCTAssertEqual(theSubject.incomingBuffer, "".data(using: .utf8)!)
-        
-        theSubject.incomingBuffer = "test".data(using: .utf8)!
-        let result2 = theSubject.getNextStringTokenizedBynewline(dataIn: &theSubject.incomingBuffer )
-        XCTAssertEqual(result2, nil)
-        XCTAssertEqual(theSubject.incomingBuffer, "test".data(using: .utf8)!)
-        
-        var testDataArray1 = "test\n".data(using: .ascii)!
-        let result3 = theSubject.getNextStringTokenizedBynewline(dataIn: &testDataArray1)
-        XCTAssertEqual(result3, "test\n".data(using: .utf8)!)
-        XCTAssertEqual(testDataArray1, "".data(using: .utf8)!)
-        
-        theSubject.incomingBuffer = "test\nmoreStuff".data(using: .utf8)!
-        let result4 = theSubject.getNextStringTokenizedBynewline(dataIn: &theSubject.incomingBuffer)
-        XCTAssertEqual(result4, "test\n".data(using: .utf8)!)
-        XCTAssertEqual(theSubject.incomingBuffer, "moreStuff".data(using: .utf8)!)
-        
-        theSubject.incomingBuffer = "test\nmoreStuff\nAndAgain".data(using: .utf8)!
-        let result5 = theSubject.getNextStringTokenizedBynewline(dataIn: &theSubject.incomingBuffer)
-        XCTAssertEqual(result5, "test\n".data(using: .utf8)!)
-        XCTAssertEqual(theSubject.incomingBuffer, "moreStuff\nAndAgain".data(using: .utf8)!)
-    }
+  
     
     class MockMessageFormattingBuffer : SendMessageFormattingBuffer
     {
@@ -271,6 +255,15 @@ class BLEFriendSimulatorTests: XCTestCase {
         XCTAssertEqual(theSubject.NVRam.count, 256)
         XCTAssertEqual(theSubject.NVRam, "testing NVdongstring, this should have a total\nof 256 characters. I'm only testing with UTF characters.LetsRepeatIt: To be or not to be, that is the question etc... not that much text done correctly.  Let's see what else we can store in here...  something.".data(using: .utf8)!)
     }
-   
+    
+    func testgetInfo()
+    {
+        let theSubject = BLEFriendSimulator()
+        let theDelegate = MockBLEFriendSimulatorDelegate();
+        theSubject.delegate = theDelegate;
+        
+        XCTAssertTrue(theSubject.getInfo(incomingMessage: "this is ignored".data(using: .utf8)!))
+        XCTAssertEqual(theDelegate.receivedStrings.count, 2)
+    }
     
 }

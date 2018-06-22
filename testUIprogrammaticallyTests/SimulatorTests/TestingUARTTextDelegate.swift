@@ -16,8 +16,8 @@ class TestingUARTTextDelegate : ReceiveMessageDelegate
     
     func receiveStringFromUART(receive: Data)
     {
-        receivedCount = receivedCount + 1
         receivedStrings.append(String(data: receive, encoding: .utf8)!)
+        receivedCount = receivedCount + 1
     }
 }
 

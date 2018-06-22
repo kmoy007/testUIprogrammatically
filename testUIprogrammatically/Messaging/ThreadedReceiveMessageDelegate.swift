@@ -33,8 +33,15 @@ class ThreadedReceiveMessageDelegate<T : ReceiveMessageDelegate> : Thread
          theThread = ThreadedReceiveMessageDelegate<ElectronSimulator>(theObject: self)
          theThread?.start();
          }*/
-        assert(receivedDataBuffer == nil, "ThreadedReceiveMessageDelegate<T>::receiveStringFromUART buffer overflow!")
-        receivedDataBuffer = receive
+        
+        if (receivedDataBuffer != nil)
+        {
+            receivedDataBuffer!.append(receive)
+        }
+        else
+        {
+            receivedDataBuffer = receive
+        }
         messageReceivedCondition.signal();
     }
     
@@ -72,12 +79,12 @@ class ThreadedReceiveMessageDelegate<T : ReceiveMessageDelegate> : Thread
         threadIsRunning = true;
         threadStartedCondition.signal()
         var shouldQuit = false;
-        while (!shouldQuit)  //NO QUIT MECHANISM YET
+        while (!shouldQuit)
         {
             messageReceivedCondition.lock()
             while(receivedDataBuffer == nil) && !isCancelled
             {
-                messageReceivedCondition.wait()
+                messageReceivedCondition.wait(until: Date() + 1)
             }
             if (isCancelled)
             {

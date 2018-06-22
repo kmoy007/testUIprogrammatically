@@ -13,7 +13,11 @@ enum BLEMode { case command, data }
 
 class BLEFriendSimulator : ReceiveMessageDelegate
 {
-    var messageSink: SendMessageFormattingBuffer?
+    /*var messageSink = BLEFriend_SendMessageFormattingBuffer()
+    init()
+    {
+        messageSink.messageDestination = delegate;
+    }*/
     
 //    enum BLEState { case disconnected, connected }
   //  enum BLEMode { case command, data }
@@ -28,23 +32,10 @@ class BLEFriendSimulator : ReceiveMessageDelegate
     
     var incomingBuffer = Data()
     
-    func getNextStringTokenizedBynewline(dataIn : inout Data) -> Data?
-    {
-        var returnData : Data? = nil;
-       // let char = Character("\n")
-        
-        if let theIndex = dataIn.index(of: "\n".utf8.map{ UInt8($0) }[0])
-        {
-            returnData = dataIn.prefix(through: theIndex)
-            dataIn.removeSubrange(...theIndex)
-        }
-        return returnData;
-    }
-    
     func receiveStringFromUART(receive : Data)
     {
         incomingBuffer = incomingBuffer + receive;
-        while let nextString = getNextStringTokenizedBynewline(dataIn: &incomingBuffer)
+        while let nextString = Tokenizer.getNextStringTokenizedBynewline(dataIn: &incomingBuffer)
         {
             if (specialCaseModeToggle(incomingMessage: nextString))
             {
@@ -70,7 +61,9 @@ class BLEFriendSimulator : ReceiveMessageDelegate
         {
             if (incomingString == "+++\n")
             {
-                return self.toggleMode()
+                self.toggleMode()
+                delegate?.receiveStringFromUART(receive: "OK\r\n".data(using: .utf8)!)
+                return true
             }
         }
         return false;
@@ -115,12 +108,35 @@ class BLEFriendSimulator : ReceiveMessageDelegate
         return false
     }
     
+    func getInfo(incomingMessage : Data) -> Bool
+    {
+        if let theConcreteDelegate = delegate
+        {
+            let multiLineString = """
+    To be, or not to be - that is the question;
+    Whether 'tis nobler in the mind to suffer
+    """
+            theConcreteDelegate.receiveStringFromUART(receive: multiLineString.data(using: .utf8)!)
+            sleep(1);
+            theConcreteDelegate.receiveStringFromUART(receive: "\nThe slings and arrows of outrageous fortune,\nOr to take arms against a sea of troubles,".data(using: .utf8)!)
+            theConcreteDelegate.receiveStringFromUART(receive: "\n".data(using: .utf8)!)
+            //theConcreteDelegate.receiveStringFromUART(receive: "OK\r\n".data(using: .utf8)!)
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+        return true;
+    }
+    
     func ATCommandFilter(incomingMessage : Data)
     {
         let atcommandlist : [(String, (Data) -> Bool)] = [
             ("+++\n", self.toggleMode),
             ("AT+NVMWRITE=",self.WriteNVM),
             ("AT+NVMREAD=",self.ReadNVM),
+            ("ATI", self.getInfo),
             ("AT", { (theData: Data)->Bool in return self.connectionMode == BLEMode.command })
         ]
         if let incomingString = String(data: incomingMessage, encoding: .utf8)
