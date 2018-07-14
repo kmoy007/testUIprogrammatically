@@ -15,11 +15,13 @@ class BLEDeviceInterface : ReceiveMessageDelegate
     let messageReceivedCondition = NSCondition()
     private let dateGenerator: () -> Date
     
+    var upstream_TEMP : ReceiveMessageDelegate?
+    
     init(dateGenerator: @escaping () -> Date = Date.init)
     {
         self.dateGenerator = dateGenerator
     }
-    func receiveStringFromUART(receive: Data) //From BLE Device
+    func receiveStringFromUART(receive: Data) //From downstream BLE Device - wait - OR from upstream
     {
         messageReceivedCondition.lock()
         //assert(receivedDataBuffer == nil, "BLEDeviceInterface::receiveStringFromUART buffer overflow!")
@@ -33,6 +35,9 @@ class BLEDeviceInterface : ReceiveMessageDelegate
         }
         messageReceivedCondition.unlock()
         messageReceivedCondition.signal()
+        
+        upstream_TEMP?.receiveStringFromUART(receive: receivedDataBuffer!)//TEMP UNTIL WE MAKE A THREAD FOR THIS
+
         NotificationCenter.default.post(name:NSNotification.Name(rawValue: "NotifyReceivedBLE_UART_Message"), object: nil)
     }
     

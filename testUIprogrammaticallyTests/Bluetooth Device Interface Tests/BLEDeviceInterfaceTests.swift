@@ -282,7 +282,7 @@ class BLEDeviceInterfaceTests: XCTestCase {
         let bleDeviceSimulator = BLEFriendSimulator();
         
         bleDeviceInterface.theDevice = bleDeviceSimulator
-        bleDeviceSimulator.delegate = bleDeviceInterface
+        bleDeviceSimulator.upStreamDevice = bleDeviceInterface
         
         bleDeviceSimulator.connectionMode = BLEMode.command; //setup command mode
         
@@ -310,7 +310,7 @@ class BLEDeviceInterfaceTests: XCTestCase {
         let bleDeviceSimulator = BLEFriendSimulator();
         
         bleDeviceInterface.theDevice = bleDeviceSimulator
-        bleDeviceSimulator.delegate = bleDeviceInterface
+        bleDeviceSimulator.upStreamDevice = bleDeviceInterface
         
         bleDeviceSimulator.connectionMode = BLEMode.command; //setup command mode
         
@@ -341,7 +341,7 @@ class BLEDeviceInterfaceTests: XCTestCase {
         let bleDeviceSimulator = BLEFriendSimulator();
         
         bleDeviceInterface.theDevice = bleDeviceSimulator
-        bleDeviceSimulator.delegate = bleDeviceInterface
+        bleDeviceSimulator.upStreamDevice = bleDeviceInterface
         
         bleDeviceSimulator.connectionMode = BLEMode.command; //setup command mode
         

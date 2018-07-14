@@ -25,10 +25,10 @@ class BLEFriendSimulator : ReceiveMessageDelegate
     var connectionState = BLEState.disconnected
     var connectionMode = BLEMode.command
     
-    var delegate : ReceiveMessageDelegate?
+    var upStreamDevice : ReceiveMessageDelegate?
     
     
-    var attachedDevice : SendMessageFormattingBuffer = DoNothingSendMessageFormattingBuffer() //not a let for unit tests
+    var downStreamDevice : SendMessageFormattingBuffer = DoNothingSendMessageFormattingBuffer() //not a let for unit tests
     
     var incomingBuffer = Data()
     
@@ -49,7 +49,7 @@ class BLEFriendSimulator : ReceiveMessageDelegate
             }
             else //(connectionMode == .data)
             {
-                attachedDevice.formatAndSendData(stringToSend: nextString)
+                downStreamDevice.formatAndSendData(stringToSend: nextString)
             }
         }
     }
@@ -62,7 +62,7 @@ class BLEFriendSimulator : ReceiveMessageDelegate
             if (incomingString == "+++\n")
             {
                 self.toggleMode()
-                delegate?.receiveStringFromUART(receive: "OK\r\n".data(using: .utf8)!)
+                upStreamDevice?.receiveStringFromUART(receive: "OK\r\n".data(using: .utf8)!)
                 return true
             }
         }
@@ -89,7 +89,7 @@ class BLEFriendSimulator : ReceiveMessageDelegate
     {
         if let parameters = splitNVMCommands(incomingMessage: incomingMessage)
         {
-            delegate?.receiveStringFromUART(receive: NVRam)
+            upStreamDevice?.receiveStringFromUART(receive: NVRam)
             return true
         }
         return false
@@ -110,16 +110,16 @@ class BLEFriendSimulator : ReceiveMessageDelegate
     
     func getInfo(incomingMessage : Data) -> Bool
     {
-        if let theConcreteDelegate = delegate
+        if let theConcreteUpStreamDevice = upStreamDevice
         {
             let multiLineString = """
     To be, or not to be - that is the question;
     Whether 'tis nobler in the mind to suffer
     """
-            theConcreteDelegate.receiveStringFromUART(receive: multiLineString.data(using: .utf8)!)
+            theConcreteUpStreamDevice.receiveStringFromUART(receive: multiLineString.data(using: .utf8)!)
             sleep(1);
-            theConcreteDelegate.receiveStringFromUART(receive: "\nThe slings and arrows of outrageous fortune,\nOr to take arms against a sea of troubles,".data(using: .utf8)!)
-            theConcreteDelegate.receiveStringFromUART(receive: "\n".data(using: .utf8)!)
+            theConcreteUpStreamDevice.receiveStringFromUART(receive: "\nThe slings and arrows of outrageous fortune,\nOr to take arms against a sea of troubles,".data(using: .utf8)!)
+            theConcreteUpStreamDevice.receiveStringFromUART(receive: "\n".data(using: .utf8)!)
             //theConcreteDelegate.receiveStringFromUART(receive: "OK\r\n".data(using: .utf8)!)
             return true;
         }
@@ -147,18 +147,18 @@ class BLEFriendSimulator : ReceiveMessageDelegate
                 {
                     if atcommand.1(incomingMessage)
                     {
-                        delegate?.receiveStringFromUART(receive: "OK\r\n".data(using: .utf8)!)
+                        upStreamDevice?.receiveStringFromUART(receive: "OK\r\n".data(using: .utf8)!)
                     }
                     else
                     {
-                        delegate?.receiveStringFromUART(receive: "ERROR\r\n".data(using: .utf8)!)
+                        upStreamDevice?.receiveStringFromUART(receive: "ERROR\r\n".data(using: .utf8)!)
                     }
                    // delegate?.receiveMessageOverBLE(receivedData: "OK\r\n".data(using: .utf8)!)
                     return;
                 }
             }
         }
-        delegate?.receiveStringFromUART(receive: "ERROR\r\n".data(using: .utf8)!)
+        upStreamDevice?.receiveStringFromUART(receive: "ERROR\r\n".data(using: .utf8)!)
     }
     
     func toggleMode(redundantString: Data = Data()) -> Bool

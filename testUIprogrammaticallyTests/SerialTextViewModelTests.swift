@@ -20,7 +20,7 @@ class SerialTextViewModelTests: XCTestCase {
     
     override func tearDown() {
         theSubject.theStrings = [String]()
-        theSubject.messageSink = nil
+        theSubject.downStream = nil
         // Put teardown code here. This method is called after the invocation of each test method in the class.
         super.tearDown()
     }
@@ -101,12 +101,12 @@ class SerialTextViewModelTests: XCTestCase {
     
     func testAttachDelegate()
     {
-        XCTAssert(theSubject.messageSink == nil)  //no UART attached
+        XCTAssert(theSubject.downStream == nil)  //no UART attached
         
         let mockmessageSink = MockMessageFormattingBuffer()
-        theSubject.messageSink = mockmessageSink
+        theSubject.downStream = mockmessageSink
         
-        XCTAssert(theSubject.messageSink === mockmessageSink)  //uncontroversial
+        XCTAssert(theSubject.downStream === mockmessageSink)  //uncontroversial
         
         XCTAssert(theSubject === mockmessageSink.messageDestination)  //this is the important checl
     }
@@ -117,7 +117,7 @@ class SerialTextViewModelTests: XCTestCase {
         XCTAssert(theSubject.theStrings.count == 0)  //no UART attached
         
         let mockmessageSink = MockMessageFormattingBuffer()
-        theSubject.messageSink = mockmessageSink
+        theSubject.downStream = mockmessageSink
         
         theSubject.sendStringFromUser(send: "")
         XCTAssertEqual(theSubject.theStrings.count, 0)  //nothing received
@@ -137,7 +137,7 @@ class SerialTextViewModelTests: XCTestCase {
         XCTAssert(theSubject.theStrings.count == 0)  //no UART attached
         
         let mockmessageSink = MockMessageFormattingBuffer()
-        theSubject.messageSink = mockmessageSink
+        theSubject.downStream = mockmessageSink
         
         theSubject.sendStringFromUser(send: "ˆ¶ˍƒ©˚©ððß´ƒ-ºthings")
         // now it pops up a dialogbox, but this isn't testing for it.

@@ -27,7 +27,7 @@ class BLEFriendSimulatorTests: XCTestCase {
         
         XCTAssertEqual(theSubject.connectionMode, BLEMode.command)
         XCTAssertEqual(theSubject.connectionState, BLEState.disconnected)
-        XCTAssert(theSubject.delegate == nil)
+        XCTAssert(theSubject.upStreamDevice == nil)
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
     }
@@ -67,7 +67,7 @@ class BLEFriendSimulatorTests: XCTestCase {
     func testfilterForToggleMode_withToggle() {
         let theSubject = BLEFriendSimulator()
         let theDelegate = MockBLEFriendSimulatorDelegate();
-        theSubject.delegate = theDelegate;
+        theSubject.upStreamDevice = theDelegate;
         
         XCTAssertEqual(theSubject.connectionMode, BLEMode.command)
         
@@ -110,9 +110,9 @@ class BLEFriendSimulatorTests: XCTestCase {
         let mockMessageFormattingBuffer = MockMessageFormattingBuffer()
         let theSubject = BLEFriendSimulator()
         
-        XCTAssertNotNil(theSubject.attachedDevice)
+        XCTAssertNotNil(theSubject.downStreamDevice)
         
-        theSubject.attachedDevice = mockMessageFormattingBuffer
+        theSubject.downStreamDevice = mockMessageFormattingBuffer
         
         theSubject.toggleMode()
         XCTAssertEqual(theSubject.connectionMode, BLEMode.data)
@@ -200,7 +200,7 @@ class BLEFriendSimulatorTests: XCTestCase {
         XCTAssertEqual(theSubject.NVRam.count, 256)
         
         let theDelegate = MockBLEFriendSimulatorDelegate();
-        theSubject.delegate = theDelegate;
+        theSubject.upStreamDevice = theDelegate;
         
         XCTAssertTrue(theSubject.ReadNVM(incomingMessage: "AT+NVMREAD=0, 256, BYTEARRAY".data(using: .utf8)!))
         XCTAssertEqual(theDelegate.receivedStrings.count, 1)
@@ -232,7 +232,7 @@ class BLEFriendSimulatorTests: XCTestCase {
         let theSubject = BLEFriendSimulator()
         XCTAssertEqual(theSubject.NVRam.count, 256)
         let theDelegate = MockBLEFriendSimulatorDelegate();
-        theSubject.delegate = theDelegate;
+        theSubject.upStreamDevice = theDelegate;
         
         let theString = "AT+NVMWRITE=0, BYTEARRAY,testing NVRAM string, this should have a total\nof 256 characters. I'm only testing with UTF characters.LetsRepeatIt: To be or not to be, that is the question etc... not that much text done correctly.  Let's see what else we can store in here...  something.".data(using: .utf8)!
         
@@ -260,10 +260,10 @@ class BLEFriendSimulatorTests: XCTestCase {
     {
         let theSubject = BLEFriendSimulator()
         let theDelegate = MockBLEFriendSimulatorDelegate();
-        theSubject.delegate = theDelegate;
+        theSubject.upStreamDevice = theDelegate;
         
         XCTAssertTrue(theSubject.getInfo(incomingMessage: "this is ignored".data(using: .utf8)!))
-        XCTAssertEqual(theDelegate.receivedStrings.count, 2)
+        XCTAssertEqual(theDelegate.receivedStrings.count, 3)
     }
     
 }

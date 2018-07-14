@@ -10,7 +10,7 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    let serialViewController = SerialTextViewController()
+    let theViewController = SerialTextViewController()//CommandAndSerialViewController()//TestingViewController()//SerialTextViewController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,7 +30,7 @@ class ViewController: UIViewController {
        // assert(false)
         if  gesture.state == .ended
         {
-            if self.navigationController?.pushViewController(serialViewController, animated: true) == nil
+            if self.navigationController?.pushViewController(theViewController, animated: true) == nil
             {
                 print("ERROR")
                 assert(false)

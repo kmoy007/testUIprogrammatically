@@ -12,6 +12,10 @@ class SerialTextViewController: UIViewController, UITextFieldDelegate
 {
     let viewModel = SerialTextViewModel()
     let simulator = SimpleTextOnly_MessageDelegate()
+    
+    let bleDeviceInterface = BLEDeviceInterface()
+    let bleFriendSimulator = BLEFriendSimulator()
+    let electronSimulator = ElectronSimulator()
 
     var multiLineTextView : UITextView = UITextView()
 
@@ -32,9 +36,23 @@ class SerialTextViewController: UIViewController, UITextFieldDelegate
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.white;
         viewModel.serialTextView = self;
-        viewModel.messageSink = BLEFriend_SendMessageFormattingBuffer()
-        viewModel.messageSink?.messageDestination = SimpleTextOnly_MessageDelegate()
         
+
+        
+        bleDeviceInterface.theDevice = bleFriendSimulator
+        bleFriendSimulator.upStreamDevice = bleDeviceInterface
+        
+        bleFriendSimulator.downStreamDevice.messageDestination = electronSimulator
+        electronSimulator.upstreamDevice = bleFriendSimulator
+        
+        viewModel.downStream = DoNothingSendMessageFormattingBuffer()//BLEFriend_SendMessageFormattingBuffer()
+        viewModel.downStream?.messageDestination = bleDeviceInterface
+        bleDeviceInterface.upstream_TEMP = viewModel
+     //   simulator.messageSink =
+        
+
+        
+            
         scrollViewSetup()
         textViewSetup()
         wordWrapSwitchSetup()
@@ -42,6 +60,8 @@ class SerialTextViewController: UIViewController, UITextFieldDelegate
         
         setConstraints()
         
+      //  viewModel.messageSink?.messageDestination
+      //  simulator.messageSink = viewModel
         simulator.pumpString()
     }
     

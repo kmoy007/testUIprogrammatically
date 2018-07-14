@@ -15,9 +15,9 @@ class SerialTextViewModel : ReceiveMessageDelegate
 {
     weak var serialTextView : SerialTextViewController? // for now - this needs to be replaced with RxSwift Observer pattern
     
-    var messageSink : SendMessageFormattingBuffer? {
+    var downStream : SendMessageFormattingBuffer? {
         didSet {
-            messageSink?.messageDestination = self //autowire - cant be ! because tests reset to nil
+            downStream?.messageDestination = self //autowire - cant be ! because tests reset to nil
         }
     }
     var theStrings = [String]()
@@ -34,9 +34,10 @@ class SerialTextViewModel : ReceiveMessageDelegate
             //error
         }
         
-        if messageSink != nil
+        if downStream != nil
         {
-            messageSink?.formatAndSendData(stringToSend: send.data(using: .utf8)!);
+            downStream?.formatAndSendData(stringToSend: send.data(using: .utf8)!);
+            serialTextView?.bleDeviceInterface.waitForAResponse(timeToWait: 5)
         }
         
         //self.sendString(sendUTF8String: sendUTF8String)
