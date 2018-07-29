@@ -15,6 +15,10 @@ class CommandAndSerialViewController: UIViewController
     let commandView = TestingViewController();
     private let topStackView = UIStackView()
     
+    let bleDeviceInterface = BLEDeviceInterface()
+    let bleFriendSimulator = BLEFriendSimulator()
+    let electronSimulator = ElectronSimulator()
+    
     override func viewDidLoad()
     {
         super.viewDidLoad()
@@ -22,26 +26,26 @@ class CommandAndSerialViewController: UIViewController
         setupStackView();
         addContentController(commandView, to: topStackView)
         addContentController(serialView, to: topStackView)
+        createAllObjects()
     }
     
-   /* func setConstraints()
+    func createAllObjects()
     {
+        bleDeviceInterface.theDevice = bleFriendSimulator.downstreamReceiver!
+        bleFriendSimulator.upStreamDevice = bleDeviceInterface.upstreamReceiver!
         
-        serialView.view.translatesAutoresizingMaskIntoConstraints = false
-        commandView.view.translatesAutoresizingMaskIntoConstraints = false
+        bleFriendSimulator.downStreamDevice.messageDestination = electronSimulator
+        electronSimulator.upstreamDevice = bleFriendSimulator.upstreamReceiver!
         
-       
+        //connect the serial view
+        serialView.viewModel.downStream = DoNothingSendMessageFormattingBuffer()//BLEFriend_SendMessageFormattingBuffer()
+        serialView.viewModel.downStream?.messageDestination = bleDeviceInterface.downstreamReceiver!
+        bleDeviceInterface.upstream_TEMP = serialView.viewModel
         
-        serialView.view.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true;
-        serialView.view.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true;
-        serialView.view.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
-        
-        commandView.view.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true;
-        commandView.view.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true;
-        commandView.view.topAnchor.constraint(equalTo: serialView.view.bottomAnchor).isActive = true
-        commandView.view.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        //connect the command view
+        commandView.setBleInterface(bleInterface:bleDeviceInterface)
     }
-    */
+
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         
         super.viewWillTransition(to: size, with: coordinator)

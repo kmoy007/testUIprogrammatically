@@ -8,10 +8,17 @@
 
 import Foundation
 
+enum CommandSuccessStatus
+{
+    case NotCalled
+    case Success
+    case NoSuccess
+}
 class TestCommand
 {
     var commandName = String()
     var lastSuccess = Date(timeIntervalSince1970: 0)
+    var lastAttemptSuccessful = CommandSuccessStatus.NotCalled
     var theCommand : (()->Bool)?
     
     init(name : String, command : (()->Bool)? = nil)
@@ -27,9 +34,12 @@ class TestCommand
             if concreteCommand()
             {
                 lastSuccess = Date()
+                lastAttemptSuccessful = CommandSuccessStatus.Success
                 return true;
             }
         }
+         lastAttemptSuccessful = CommandSuccessStatus.NoSuccess
         return false;
     }
+
 }

@@ -7,21 +7,52 @@
 //
 
 import Foundation
+import MessagePack
 
-class BLEDeviceInterface : ReceiveMessageDelegate
+class ForwardingReceiver : ReceiveMessageDelegate
+{
+    let forwardTo : (Data) -> Void
+    
+    init(forwardTo: @escaping (Data) -> Void)
+    {
+        self.forwardTo = forwardTo;
+    }
+    func receiveStringFromUART(receive: Data)
+    {
+        forwardTo(receive);
+    }
+}
+
+class BLEDeviceInterface
 {
     
     var receivedDataBuffer : Data?
     let messageReceivedCondition = NSCondition()
     private let dateGenerator: () -> Date
+    var theDevice : ReceiveMessageDelegate?// = BLEFriendSimulator();
     
     var upstream_TEMP : ReceiveMessageDelegate?
+    
+    var downstreamReceiver : ForwardingReceiver?
+    var upstreamReceiver : ForwardingReceiver?
     
     init(dateGenerator: @escaping () -> Date = Date.init)
     {
         self.dateGenerator = dateGenerator
+        setupReceivers();
     }
-    func receiveStringFromUART(receive: Data) //From downstream BLE Device - wait - OR from upstream
+    
+    func setupReceivers()
+    {
+        downstreamReceiver = ForwardingReceiver(forwardTo: receiveDownstream)
+        upstreamReceiver = ForwardingReceiver(forwardTo: receiveUpstream)
+    }
+    
+    func receiveDownstream(receive: Data)
+    {
+        theDevice?.receiveStringFromUART(receive: receive)
+    }
+    func receiveUpstream(receive: Data) //From downstream BLE Device - wait - OR from upstream
     {
         messageReceivedCondition.lock()
         //assert(receivedDataBuffer == nil, "BLEDeviceInterface::receiveStringFromUART buffer overflow!")
@@ -36,7 +67,7 @@ class BLEDeviceInterface : ReceiveMessageDelegate
         messageReceivedCondition.unlock()
         messageReceivedCondition.signal()
         
-        upstream_TEMP?.receiveStringFromUART(receive: receivedDataBuffer!)//TEMP UNTIL WE MAKE A THREAD FOR THIS
+        upstream_TEMP?.receiveStringFromUART(receive: receive)//TEMP UNTIL WE MAKE A THREAD FOR THIS
 
         NotificationCenter.default.post(name:NSNotification.Name(rawValue: "NotifyReceivedBLE_UART_Message"), object: nil)
     }
@@ -169,6 +200,20 @@ class BLEDeviceInterface : ReceiveMessageDelegate
         print("Got a notification that a message was received" )
     }
     
+    func readNVMData(packedNVMData: Data) -> MessagePackValue?
+    {
+        var unpacked : (value: MessagePackValue, remainder: Data)
+        
+        do {
+            unpacked =  try unpack(packedNVMData)
+            return unpacked.value
+            //XCTFail("Expected unpack to throw")
+        } catch {
+            return nil
+            //XCTAssertEqual(error as? MessagePackError, .invalidData)
+        }
+    }
     
-    var theDevice : ReceiveMessageDelegate?// = BLEFriendSimulator();
+    
+
 }

@@ -15,15 +15,12 @@ class TestingViewModel
 {
     weak var viewController : TestingViewController?
     
-    let bleDeviceInterface = BLEDeviceInterface()
-    let bleDeviceSimulator = BLEFriendSimulator();
-    
+    private var bleDeviceInterface : BLEDeviceInterface?
     var commands = [TestCommand]()
     
-    init()
+    func setBLEInterface(bleInterface : BLEDeviceInterface)
     {
-        bleDeviceInterface.theDevice = bleDeviceSimulator
-        bleDeviceSimulator.upStreamDevice = bleDeviceInterface
+        bleDeviceInterface = bleInterface
         createCommands();
     }
     
@@ -32,7 +29,12 @@ class TestingViewModel
         commands.append(TestCommand(name: "firstCommand"));
         commands.append(TestCommand(name: "another Command"));
         commands.append(TestCommand(name: "ToggleBLEMode", command: { () -> Bool in
-            return self.bleDeviceInterface.toggleBLEMode() } ));
+            return self.bleDeviceInterface!.toggleBLEMode() } ));
+        commands.append(TestCommand(name: "isConnected", command: { () -> Bool in
+            return self.bleDeviceInterface!.isConnected() } ));
+        
+        commands.append(TestCommand(name: "ToggleBLEMode", command: { () -> Bool in
+            return self.bleDeviceInterface!.toggleBLEMode() } ));
     
     }
 }

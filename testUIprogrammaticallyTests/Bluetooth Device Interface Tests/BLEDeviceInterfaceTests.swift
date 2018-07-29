@@ -8,6 +8,7 @@
 
 import XCTest
 @testable import testUIprogrammatically
+@testable import MessagePack
 
 //class SimpleThreadForTesting:
 class BLEDeviceInterfaceTests: XCTestCase {
@@ -58,7 +59,7 @@ class BLEDeviceInterfaceTests: XCTestCase {
         
         XCTAssertNil(threadWaiter.result)
         XCTAssertNil(bleDeviceInterface.receivedDataBuffer)
-        bleDeviceInterface.receiveStringFromUART(receive: "hello".data(using: .utf8)!)
+        bleDeviceInterface.receiveUpstream(receive: "hello".data(using: .utf8)!)
         timeTraveller.travel(by: 4)
         
         while (threadWaiter.isExecuting){ //wait for it to finish
@@ -135,7 +136,7 @@ class BLEDeviceInterfaceTests: XCTestCase {
         
         XCTAssertNil(threadWaiter.result)
         XCTAssertNil(bleDeviceInterface.receivedDataBuffer)
-        bleDeviceInterface.receiveStringFromUART(receive: "hello\nOK\n".data(using: .utf8)!)
+        bleDeviceInterface.receiveUpstream(receive: "hello\nOK\n".data(using: .utf8)!)
         timeTraveller.travel(by: 4)
         
         while (threadWaiter.isExecuting){ //wait for it to finish
@@ -171,7 +172,7 @@ class BLEDeviceInterfaceTests: XCTestCase {
         
         XCTAssertNil(threadWaiter.result)
         XCTAssertNil(bleDeviceInterface.receivedDataBuffer)
-        bleDeviceInterface.receiveStringFromUART(receive: "hello\nNOTOK\n".data(using: .utf8)!)
+        bleDeviceInterface.receiveUpstream(receive: "hello\nNOTOK\n".data(using: .utf8)!)
         timeTraveller.travel(by: 6)
         
         while (threadWaiter.isExecuting){ //wait for it to finish
@@ -207,7 +208,7 @@ class BLEDeviceInterfaceTests: XCTestCase {
         
         XCTAssertNil(threadWaiter.result)
         XCTAssertNil(bleDeviceInterface.receivedDataBuffer)
-        bleDeviceInterface.receiveStringFromUART(receive: "hello\nOK\nwhatIsThis\n".data(using: .utf8)!)
+        bleDeviceInterface.receiveUpstream(receive: "hello\nOK\nwhatIsThis\n".data(using: .utf8)!)
         timeTraveller.travel(by: 6)
         
         while (threadWaiter.isExecuting){ //wait for it to finish
@@ -232,7 +233,7 @@ class BLEDeviceInterfaceTests: XCTestCase {
     
     class MockDevice : ReceiveMessageDelegate
     {
-        init(interface : ReceiveMessageDelegate)
+        init(interface : BLEDeviceInterface)
         {
             theInterface = interface
         }
@@ -240,15 +241,15 @@ class BLEDeviceInterfaceTests: XCTestCase {
         func receiveStringFromUART(receive: Data) {
             if returnOK == true
             {
-                theInterface.receiveStringFromUART(receive: "OK\n".data(using: .utf8)!)
+                theInterface.receiveUpstream(receive: "OK\n".data(using: .utf8)!)
             }
             else
             {
-                theInterface.receiveStringFromUART(receive: "junkData\n".data(using: .utf8)!)
+                theInterface.receiveUpstream(receive: "junkData\n".data(using: .utf8)!)
             }
         }
         
-        let theInterface : ReceiveMessageDelegate
+        let theInterface : BLEDeviceInterface
     }
     func testgetBLEMode()
     {
@@ -281,8 +282,8 @@ class BLEDeviceInterfaceTests: XCTestCase {
         let bleDeviceInterface = BLEDeviceInterface()
         let bleDeviceSimulator = BLEFriendSimulator();
         
-        bleDeviceInterface.theDevice = bleDeviceSimulator
-        bleDeviceSimulator.upStreamDevice = bleDeviceInterface
+        bleDeviceInterface.theDevice = bleDeviceSimulator.downstreamReceiver!
+        bleDeviceSimulator.upStreamDevice = bleDeviceInterface.upstreamReceiver!
         
         bleDeviceSimulator.connectionMode = BLEMode.command; //setup command mode
         
@@ -309,8 +310,8 @@ class BLEDeviceInterfaceTests: XCTestCase {
         let bleDeviceInterface = BLEDeviceInterface()
         let bleDeviceSimulator = BLEFriendSimulator();
         
-        bleDeviceInterface.theDevice = bleDeviceSimulator
-        bleDeviceSimulator.upStreamDevice = bleDeviceInterface
+        bleDeviceInterface.theDevice = bleDeviceSimulator.downstreamReceiver!
+        bleDeviceSimulator.upStreamDevice = bleDeviceInterface.upstreamReceiver!
         
         bleDeviceSimulator.connectionMode = BLEMode.command; //setup command mode
         
@@ -340,8 +341,8 @@ class BLEDeviceInterfaceTests: XCTestCase {
         let bleDeviceInterface = BLEDeviceInterface()
         let bleDeviceSimulator = BLEFriendSimulator();
         
-        bleDeviceInterface.theDevice = bleDeviceSimulator
-        bleDeviceSimulator.upStreamDevice = bleDeviceInterface
+        bleDeviceInterface.theDevice = bleDeviceSimulator.downstreamReceiver!
+        bleDeviceSimulator.upStreamDevice = bleDeviceInterface.upstreamReceiver!
         
         bleDeviceSimulator.connectionMode = BLEMode.command; //setup command mode
         
@@ -363,6 +364,29 @@ class BLEDeviceInterfaceTests: XCTestCase {
         }
         
     }
+
+    func testreadNVMDataDirectCall()
+    {
+        let inputData : MessagePackValue = ["ver" : 1.0, "deviceName" : "testing"];
+        let packedData = pack(inputData);
+    
+        let bleDeviceInterface = BLEDeviceInterface()
+        let bleDeviceSimulator = BLEFriendSimulator();
+        
+        bleDeviceInterface.theDevice = bleDeviceSimulator.downstreamReceiver!
+        bleDeviceSimulator.upStreamDevice = bleDeviceInterface.upstreamReceiver!
+        
+        bleDeviceSimulator.connectionMode = BLEMode.command; //setup command mode
+        
+        
+        let response = bleDeviceInterface.readNVMData(packedNVMData: packedData)
+        XCTAssert(response != nil)
+        XCTAssertEqual(response?.count, 2)
+        XCTAssertEqual(response?["ver"], 1.0);
+        XCTAssertEqual(response?["deviceName"], "testing");
+    }
+    
+   // func readNVMData(packedNVMData: Data) -> MessagePackValue?
 
     
 }

@@ -11,8 +11,21 @@ import Foundation
 enum BLEState { case disconnected, connected }
 enum BLEMode { case command, data }
 
-class BLEFriendSimulator : ReceiveMessageDelegate
+class BLEFriendSimulator
 {
+    var downstreamReceiver : ForwardingReceiver?
+    var upstreamReceiver : ForwardingReceiver?
+    
+    init()
+    {
+        setupReceivers();
+    }
+    
+    func setupReceivers()
+    {
+        downstreamReceiver = ForwardingReceiver(forwardTo: receiveDownstream)
+        upstreamReceiver = ForwardingReceiver(forwardTo: receiveUpstream)
+    }
     /*var messageSink = BLEFriend_SendMessageFormattingBuffer()
     init()
     {
@@ -32,7 +45,13 @@ class BLEFriendSimulator : ReceiveMessageDelegate
     
     var incomingBuffer = Data()
     
-    func receiveStringFromUART(receive : Data)
+    func receiveUpstream(receive : Data)
+    {
+         // just forward it on
+        upStreamDevice?.receiveStringFromUART(receive: receive)
+    }
+    
+    func receiveDownstream(receive : Data)
     {
         incomingBuffer = incomingBuffer + receive;
         while let nextString = Tokenizer.getNextStringTokenizedBynewline(dataIn: &incomingBuffer)

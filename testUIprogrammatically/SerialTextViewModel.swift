@@ -20,6 +20,7 @@ class SerialTextViewModel : ReceiveMessageDelegate
             downStream?.messageDestination = self //autowire - cant be ! because tests reset to nil
         }
     }
+    
     var theStrings = [String]()
    
     func sendStringFromUser(send : String)
@@ -37,7 +38,7 @@ class SerialTextViewModel : ReceiveMessageDelegate
         if downStream != nil
         {
             downStream?.formatAndSendData(stringToSend: send.data(using: .utf8)!);
-            serialTextView?.bleDeviceInterface.waitForAResponse(timeToWait: 5)
+    //        serialTextView?.bleDeviceInterface.waitForAResponse(timeToWait: 5)
         }
         
         //self.sendString(sendUTF8String: sendUTF8String)

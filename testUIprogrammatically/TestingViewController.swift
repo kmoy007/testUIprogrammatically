@@ -17,6 +17,16 @@ class TestingViewController: UIViewController, UITableViewDelegate, UITableViewD
     private let fruit: NSArray = ["apple", "orange", "banana", "strawberry", "lemon"]
     private let vegetable: NSArray = ["carrots", "avocado", "potato", "onion"]
     
+    func setBleInterface(bleInterface : BLEDeviceInterface)
+    {
+        viewModel.setBLEInterface(bleInterface: bleInterface)
+    }
+    
+    override func viewDidAppear(_ animated: Bool)
+    {
+        super.viewDidAppear(animated);
+        myTableView.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: self.view.frame.size.height)
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -101,6 +111,21 @@ class TestingViewController: UIViewController, UITableViewDelegate, UITableViewD
             cell.commandName_label.text = "\(viewModel.commands[indexPath.row].commandName)"
             cell.labMessage.text = "Message \(indexPath.row)"
             cell.lastSuccessTime_label.text = DateFormatter.localizedString(from: viewModel.commands[indexPath.row].lastSuccess as Date, dateStyle: .short, timeStyle: .short)
+            
+            switch viewModel.commands[indexPath.row].lastAttemptSuccessful
+            {
+            case .NotCalled:
+                cell.imgUser.backgroundColor = UIColor.blue
+            case .NoSuccess:
+                cell.imgUser.backgroundColor = UIColor.red
+            case .Success:
+                cell.imgUser.backgroundColor = UIColor.green
+            default:
+                cell.imgUser.backgroundColor = UIColor.black
+            }
+            
+            
+            
             return cell
         }
         else if indexPath.section == 1

@@ -117,40 +117,40 @@ class BLEFriendSimulatorTests: XCTestCase {
         theSubject.toggleMode()
         XCTAssertEqual(theSubject.connectionMode, BLEMode.data)
        
-        theSubject.receiveStringFromUART(receive: "".data(using: .utf8)!)
+        theSubject.receiveDownstream(receive: "".data(using: .utf8)!)
         XCTAssertEqual(mockMessageFormattingBuffer.receivedDataAsString.count, 0)
         
-        theSubject.receiveStringFromUART(receive: "test".data(using: .utf8)!)
+        theSubject.receiveDownstream(receive: "test".data(using: .utf8)!)
         XCTAssertEqual(mockMessageFormattingBuffer.receivedDataAsString.count, 0)
         
-        theSubject.receiveStringFromUART(receive: "ing\n".data(using: .utf8)!)
+        theSubject.receiveDownstream(receive: "ing\n".data(using: .utf8)!)
         XCTAssertEqual(mockMessageFormattingBuffer.receivedDataAsString.count, 1)
         XCTAssertEqual(mockMessageFormattingBuffer.receivedDataAsString[0], "testing\n".data(using: .utf8)!)
         
-        theSubject.receiveStringFromUART(receive: "myname\nisken\nhello".data(using: .utf8)!)
+        theSubject.receiveDownstream(receive: "myname\nisken\nhello".data(using: .utf8)!)
         XCTAssertEqual(mockMessageFormattingBuffer.receivedDataAsString.count, 3)
         XCTAssertEqual(mockMessageFormattingBuffer.receivedDataAsString[0], "testing\n".data(using: .utf8)!)
         XCTAssertEqual(mockMessageFormattingBuffer.receivedDataAsString[1], "myname\n".data(using: .utf8)!)
         XCTAssertEqual(mockMessageFormattingBuffer.receivedDataAsString[2], "isken\n".data(using: .utf8)!)
         
-        theSubject.receiveStringFromUART(receive: "\n".data(using: .utf8)!)
+        theSubject.receiveDownstream(receive: "\n".data(using: .utf8)!)
         XCTAssertEqual(mockMessageFormattingBuffer.receivedDataAsString.count, 4)
         XCTAssertEqual(mockMessageFormattingBuffer.receivedDataAsString[3], "hello\n".data(using: .utf8)!)
         
-        theSubject.receiveStringFromUART(receive: "hello+++\n".data(using: .utf8)!)
+        theSubject.receiveDownstream(receive: "hello+++\n".data(using: .utf8)!)
         XCTAssertEqual(mockMessageFormattingBuffer.receivedDataAsString.count, 5)
         XCTAssertEqual(mockMessageFormattingBuffer.receivedDataAsString[4], "hello+++\n".data(using: .utf8)!)
         
         XCTAssertEqual(theSubject.connectionMode, BLEMode.data)
-        theSubject.receiveStringFromUART(receive: "+++\n".data(using: .utf8)!)
+        theSubject.receiveDownstream(receive: "+++\n".data(using: .utf8)!)
         XCTAssertEqual(mockMessageFormattingBuffer.receivedDataAsString.count, 5) //NO NEW STRING - Consumed as AT command
         XCTAssertEqual(theSubject.connectionMode, BLEMode.command)
 
-        theSubject.receiveStringFromUART(receive: "helloagain\n".data(using: .utf8)!)
+        theSubject.receiveDownstream(receive: "helloagain\n".data(using: .utf8)!)
         XCTAssertEqual(mockMessageFormattingBuffer.receivedDataAsString.count, 5) //NO NEW STRING - Consumed as AT command
         
-        theSubject.receiveStringFromUART(receive: "+++\n".data(using: .utf8)!)
-        theSubject.receiveStringFromUART(receive: "lasttry\n".data(using: .utf8)!)
+        theSubject.receiveDownstream(receive: "+++\n".data(using: .utf8)!)
+        theSubject.receiveDownstream(receive: "lasttry\n".data(using: .utf8)!)
         XCTAssertEqual(theSubject.connectionMode, BLEMode.data)
         XCTAssertEqual(mockMessageFormattingBuffer.receivedDataAsString.count, 6)
         XCTAssertEqual(mockMessageFormattingBuffer.receivedDataAsString[5], "lasttry\n".data(using: .utf8)!)

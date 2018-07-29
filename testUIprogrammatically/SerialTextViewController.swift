@@ -11,12 +11,7 @@ import UIKit
 class SerialTextViewController: UIViewController, UITextFieldDelegate
 {
     let viewModel = SerialTextViewModel()
-    let simulator = SimpleTextOnly_MessageDelegate()
     
-    let bleDeviceInterface = BLEDeviceInterface()
-    let bleFriendSimulator = BLEFriendSimulator()
-    let electronSimulator = ElectronSimulator()
-
     var multiLineTextView : UITextView = UITextView()
 
     var scrollView : UIScrollView = UIScrollView()
@@ -36,33 +31,13 @@ class SerialTextViewController: UIViewController, UITextFieldDelegate
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.white;
         viewModel.serialTextView = self;
-        
-
-        
-        bleDeviceInterface.theDevice = bleFriendSimulator
-        bleFriendSimulator.upStreamDevice = bleDeviceInterface
-        
-        bleFriendSimulator.downStreamDevice.messageDestination = electronSimulator
-        electronSimulator.upstreamDevice = bleFriendSimulator
-        
-        viewModel.downStream = DoNothingSendMessageFormattingBuffer()//BLEFriend_SendMessageFormattingBuffer()
-        viewModel.downStream?.messageDestination = bleDeviceInterface
-        bleDeviceInterface.upstream_TEMP = viewModel
-     //   simulator.messageSink =
-        
-
-        
-            
+    
         scrollViewSetup()
         textViewSetup()
         wordWrapSwitchSetup()
         sendTextSetup()
         
         setConstraints()
-        
-      //  viewModel.messageSink?.messageDestination
-      //  simulator.messageSink = viewModel
-        simulator.pumpString()
     }
     
     func setConstraints()
@@ -144,8 +119,7 @@ class SerialTextViewController: UIViewController, UITextFieldDelegate
     
     @objc func switchStateDidChange(_ sender:UISwitch!)
     {
-        simulator.pumpString()
-        //TEMP Change wordWrap = sender.isOn;
+        wordWrap = sender.isOn;
     }
     
     func scrollViewSetup()

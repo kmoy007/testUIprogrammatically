@@ -10,7 +10,7 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    let theViewController = SerialTextViewController()//CommandAndSerialViewController()//TestingViewController()//SerialTextViewController()
+    let theViewController = BLEDeviceSelectionViewController()//CommandAndSerialViewController()//TestingViewController()//SerialTextViewController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
