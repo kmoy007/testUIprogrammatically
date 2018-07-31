@@ -9,12 +9,21 @@
 import Foundation
 import CoreBluetooth
 
-class BLEDeviceDiscovered : Equatable , CBPeripheralDelegate
+protocol BLEDeviceDelegate : AnyObject
+{
+    func stateChange(device: BLEDeviceDiscovered);
+}
+
+class BLEDeviceDiscovered : NSObject, CBPeripheralDelegate
 {
     static func == (lhs: BLEDeviceDiscovered, rhs: BLEDeviceDiscovered) -> Bool {
         return ((lhs.deviceName == rhs.deviceName)
                 && (lhs.peripheralObj.identifier == rhs.peripheralObj.identifier))
     }
+    
+    weak var delegate : BLEDeviceDelegate?
+    
+    static let uartUUID = CBUUID(string: "6E400001-B5A3-F393-E0A9-E50E24DCCA9E")
     
     var deviceName = String()
     var lastSuccess = Date(timeIntervalSince1970: 0)
@@ -27,10 +36,12 @@ class BLEDeviceDiscovered : Equatable , CBPeripheralDelegate
   
     init(name : String, rssiInt: Int, peripheral: CBPeripheral)
     {
+        peripheralObj = peripheral
+        super.init()
         deviceName = name
         rssi = rssiInt
-        peripheralObj = peripheral
         lastSuccess = Date();
+        peripheralObj.delegate = self
     }
     
     func getConnectionStateAsString() -> String
@@ -51,6 +62,21 @@ class BLEDeviceDiscovered : Equatable , CBPeripheralDelegate
         }
     }
     
+    func UpdateServicesOffered()
+    {
+        if let concreteServices = peripheralObj.services
+        {
+            for service in concreteServices
+            {
+                if service.uuid == BLEDeviceDiscovered.uartUUID
+                {
+                    hasUART = true
+                    delegate?.stateChange(device: self)
+                }
+            }
+        }
+    }
+    
     
     
     //MARK - CBPeripheralDelegate calls
@@ -59,15 +85,16 @@ class BLEDeviceDiscovered : Equatable , CBPeripheralDelegate
         if didDiscoverServices != nil
         {
             print(didDiscoverServices!);
-            errorStrings.append(didDiscoverServices!.localizedDescription);
+           // errorStrings.append(didDiscoverServices!.localizedDescription);
         }
+        UpdateServicesOffered();
     }
     func peripheral(_ peripheral : CBPeripheral, didDiscoverIncludedServicesFor: CBService, error: Error?)
     {//Invoked when you discover the included services of a specified service.
         if error != nil
         {
             print(error!);
-            errorStrings.append(error!.localizedDescription);
+          //  errorStrings.append(error!.localizedDescription);
         }
     }
     

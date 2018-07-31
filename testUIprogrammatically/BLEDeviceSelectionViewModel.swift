@@ -10,8 +10,12 @@ import Foundation
 import CoreBluetooth
 import RxCocoa
 
-class BLEDeviceSelectionViewModel : NSObject, CBCentralManagerDelegate
+class BLEDeviceSelectionViewModel : NSObject, CBCentralManagerDelegate , BLEDeviceDelegate
 {
+    func stateChange(device: BLEDeviceDiscovered) {
+        triggerUIReload()
+    }
+    
     override init()
     {
         super.init()
@@ -93,10 +97,8 @@ class BLEDeviceSelectionViewModel : NSObject, CBCentralManagerDelegate
     
     func connectDevice(device: BLEDeviceDiscovered)
     {
-        var thePeripheral = BLEPeripheralWrapper(discoveredPeripheral: device.peripheralObj)
+      //  var thePeripheral = BLEPeripheralWrapper(discoveredPeripheral: device.peripheralObj)
         centralManager.connect(device.peripheralObj);
-
-        
     }
     
     func centralManagerDidUpdateState(_ central: CBCentralManager) {
@@ -126,8 +128,24 @@ class BLEDeviceSelectionViewModel : NSObject, CBCentralManagerDelegate
     {
         if let devicename = peripheral.name
         {
+            print ("Found: \(devicename).  Advertising:")
+            for advert in advertisementData
+            {
+                print("Key: \(advert.key) - Data: <\(advert.value)>")
+            }
+            
             let newDevice = BLEDeviceDiscovered(name: devicename, rssiInt: Int(truncating: RSSI), peripheral: peripheral)
-        
+            if let serviceUUIDs_Any = advertisementData[CBAdvertisementDataServiceUUIDsKey]
+            {
+                let serviceUUIDs = serviceUUIDs_Any as! [CBUUID]
+                for serviceUUID in serviceUUIDs
+                {
+                    if serviceUUID == BLEDeviceDiscovered.uartUUID
+                    {
+                        newDevice.hasUART = true;
+                    }
+                }
+            }
            // print("peripheral: \(peripheral)")
             if let alreadyExistingDevice = devices.value.first(where: {$0 == newDevice})
             {
@@ -137,6 +155,7 @@ class BLEDeviceSelectionViewModel : NSObject, CBCentralManagerDelegate
             }
             else
             {
+                newDevice.delegate = self
                 devices.accept(devices.value + [newDevice])
             }
         }
@@ -147,6 +166,7 @@ class BLEDeviceSelectionViewModel : NSObject, CBCentralManagerDelegate
     {
         //Invoked when a connection is successfully created with a peripheral.
         print("Connection Success: \(String(describing: didConnect.name))")
+        didConnect.discoverServices([BLEDeviceDiscovered.uartUUID])
         triggerUIReload()
     }
     func centralManager(_ manager: CBCentralManager, didDisconnectPeripheral: CBPeripheral, error: Error?)

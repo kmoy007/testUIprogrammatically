@@ -180,6 +180,11 @@ class BLEDeviceSelectionViewController: UIViewController, UITableViewDelegate, U
         myTableView.reloadData() //redraw
     }
     
+    func setTextColor(color: UIColor)
+    {
+        
+    }
+    
     // return cells
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
@@ -189,7 +194,15 @@ class BLEDeviceSelectionViewController: UIViewController, UITableViewDelegate, U
         {
             let thisDevice = concreteViewModel.devices.value[indexPath.row]
             cell.deviceName_label.text = "\(thisDevice.deviceName)"
-            cell.labMessage.text = "RSSI: \(thisDevice.rssi)"
+            
+            var uartString = ""
+            cell.setTextColor(color: .black)
+            if (thisDevice.hasUART)
+            {
+                cell.setTextColor(color: .blue)
+                uartString = " UART"
+            }
+            cell.labMessage.text = "RSSI: \(thisDevice.rssi) \(uartString)"
             cell.connectionState_label.text = thisDevice.getConnectionStateAsString();
             cell.lastSuccessTime_label.text = DateFormatter.localizedString(from: thisDevice.lastSuccess as Date, dateStyle: .short, timeStyle: .short)
             if (thisDevice.isConnected)

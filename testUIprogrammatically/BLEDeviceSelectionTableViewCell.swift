@@ -46,6 +46,16 @@ class BLEDeviceSelectionTableViewCell: UITableViewCell {
          contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-[info_button]-|", options: [], metrics: nil, views: viewsDict))
         contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-[lastSuccessTime]-[connectionState]-|", options: [], metrics: nil, views: viewsDict))
         contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-[message]-[connectionState]-[info_button]-|", options: [], metrics: nil, views: viewsDict))
+        
+        setTextColor(color: .black)
+    }
+    
+    func setTextColor(color: UIColor)
+    {
+        deviceName_label.textColor = color;
+        labMessage.textColor = color;
+        lastSuccessTime_label.textColor = color;
+        connectionState_label.textColor = color;
     }
     
     required init?(coder aDecoder: NSCoder) {
