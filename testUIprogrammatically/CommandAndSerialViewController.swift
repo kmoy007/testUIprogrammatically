@@ -11,6 +11,11 @@ import UIKit
 
 class CommandAndSerialViewController: UIViewController
 {
+    deinit
+    {
+        print("deinit CommandAndSerialViewController")
+    }
+    
     let serialView = SerialTextViewController();
     let commandView = TestingViewController();
     private let topStackView = UIStackView()

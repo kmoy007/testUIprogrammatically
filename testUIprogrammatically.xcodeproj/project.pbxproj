@@ -36,6 +36,11 @@
 		58A8712D20BA6ECE00F83A41 /* BLEFriend_SendMessageFormattingBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58A8712C20BA6ECE00F83A41 /* BLEFriend_SendMessageFormattingBuffer.swift */; };
 		58A8713020BA700100F83A41 /* BLEFriend_MessageFormatterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58A8712F20BA700100F83A41 /* BLEFriend_MessageFormatterTests.swift */; };
 		58C2CA7F20BA61F3006ACA97 /* SerialTextViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58C2CA7E20BA61F3006ACA97 /* SerialTextViewModelTests.swift */; };
+		58C3775B210F5C15005DB6AC /* BLEPeripheralWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58C3775A210F5C14005DB6AC /* BLEPeripheralWrapper.swift */; };
+		58C3775D210FB6BE005DB6AC /* ActivitySpinnerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58C3775C210FB6BE005DB6AC /* ActivitySpinnerExtension.swift */; };
+		58C3775F210FDC24005DB6AC /* BLEDeviceCompleteInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58C3775E210FDC24005DB6AC /* BLEDeviceCompleteInfoViewModel.swift */; };
+		58C37761210FDC34005DB6AC /* BLEDeviceCompleteInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58C37760210FDC34005DB6AC /* BLEDeviceCompleteInfoViewController.swift */; };
+		58C37763210FE703005DB6AC /* BLEDeviceCompleteInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58C37762210FE703005DB6AC /* BLEDeviceCompleteInfo.swift */; };
 		58D0A7A620F58E0D00B1ACAC /* DummyCommandTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D0A7A520F58E0D00B1ACAC /* DummyCommandTableViewCell.swift */; };
 		58D0A7A820F7B95300B1ACAC /* CommandAndSerialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D0A7A720F7B95300B1ACAC /* CommandAndSerialViewController.swift */; };
 		58EDC57420BE3E7F00CCCE77 /* DeviceSimulator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58EDC57320BE3E7F00CCCE77 /* DeviceSimulator.swift */; };
@@ -103,6 +108,11 @@
 		58A8712C20BA6ECE00F83A41 /* BLEFriend_SendMessageFormattingBuffer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLEFriend_SendMessageFormattingBuffer.swift; sourceTree = "<group>"; };
 		58A8712F20BA700100F83A41 /* BLEFriend_MessageFormatterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLEFriend_MessageFormatterTests.swift; sourceTree = "<group>"; };
 		58C2CA7E20BA61F3006ACA97 /* SerialTextViewModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SerialTextViewModelTests.swift; sourceTree = "<group>"; };
+		58C3775A210F5C14005DB6AC /* BLEPeripheralWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLEPeripheralWrapper.swift; sourceTree = "<group>"; };
+		58C3775C210FB6BE005DB6AC /* ActivitySpinnerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivitySpinnerExtension.swift; sourceTree = "<group>"; };
+		58C3775E210FDC24005DB6AC /* BLEDeviceCompleteInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLEDeviceCompleteInfoViewModel.swift; sourceTree = "<group>"; };
+		58C37760210FDC34005DB6AC /* BLEDeviceCompleteInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLEDeviceCompleteInfoViewController.swift; sourceTree = "<group>"; };
+		58C37762210FE703005DB6AC /* BLEDeviceCompleteInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLEDeviceCompleteInfo.swift; sourceTree = "<group>"; };
 		58D0A7A520F58E0D00B1ACAC /* DummyCommandTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DummyCommandTableViewCell.swift; sourceTree = "<group>"; };
 		58D0A7A720F7B95300B1ACAC /* CommandAndSerialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandAndSerialViewController.swift; sourceTree = "<group>"; };
 		58EDC57320BE3E7F00CCCE77 /* DeviceSimulator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceSimulator.swift; sourceTree = "<group>"; };
@@ -148,7 +158,10 @@
 		586009C520CCE30B00A3326D /* Bluetooth Device Interface */ = {
 			isa = PBXGroup;
 			children = (
+				58C37762210FE703005DB6AC /* BLEDeviceCompleteInfo.swift */,
+				5803ADE3210A830700AB7B76 /* BLEDeviceDiscovered.swift */,
 				586009C620CCE33D00A3326D /* BLEDeviceInterface.swift */,
+				58C3775A210F5C14005DB6AC /* BLEPeripheralWrapper.swift */,
 			);
 			path = "Bluetooth Device Interface";
 			sourceTree = "<group>";
@@ -212,10 +225,12 @@
 			isa = PBXGroup;
 			children = (
 				587F4EC620B50425007C9416 /* AppDelegate.swift */,
+				58C3775E210FDC24005DB6AC /* BLEDeviceCompleteInfoViewModel.swift */,
+				58C37760210FDC34005DB6AC /* BLEDeviceCompleteInfoViewController.swift */,
 				5803ADDD210A80BD00AB7B76 /* BLEDeviceSelectionViewController.swift */,
 				5803ADE1210A820F00AB7B76 /* BLEDeviceSelectionTableViewCell.swift */,
 				5803ADDF210A80D700AB7B76 /* BLEDeviceSelectionViewModel.swift */,
-				5803ADE3210A830700AB7B76 /* BLEDeviceDiscovered.swift */,
+				58C3775C210FB6BE005DB6AC /* ActivitySpinnerExtension.swift */,
 				587F4EC820B50425007C9416 /* ViewController.swift */,
 				58D0A7A720F7B95300B1ACAC /* CommandAndSerialViewController.swift */,
 				587F4EF620B5082E007C9416 /* SerialTextViewController.swift */,
@@ -517,12 +532,15 @@
 				587F4EF720B5082E007C9416 /* SerialTextViewController.swift in Sources */,
 				586009C220C93F3000A3326D /* BasicCommandProcessor.swift in Sources */,
 				587F17B120DF62BA004AE959 /* TestCommand.swift in Sources */,
+				58C37763210FE703005DB6AC /* BLEDeviceCompleteInfo.swift in Sources */,
 				58EDC57820BE9ADC00CCCE77 /* BLEFriendSimulator.swift in Sources */,
 				5803ADE2210A820F00AB7B76 /* BLEDeviceSelectionTableViewCell.swift in Sources */,
 				586009C720CCE33D00A3326D /* BLEDeviceInterface.swift in Sources */,
 				586009D620DCAD6200A3326D /* Tokenizer.swift in Sources */,
+				58C3775D210FB6BE005DB6AC /* ActivitySpinnerExtension.swift in Sources */,
 				586009CD20CD3E2000A3326D /* ThreadedReceiveMessageDelegate.swift in Sources */,
 				58A8712A20BA62FB00F83A41 /* SerialTextViewModel.swift in Sources */,
+				58C3775F210FDC24005DB6AC /* BLEDeviceCompleteInfoViewModel.swift in Sources */,
 				58D0A7A620F58E0D00B1ACAC /* DummyCommandTableViewCell.swift in Sources */,
 				58A8712D20BA6ECE00F83A41 /* BLEFriend_SendMessageFormattingBuffer.swift in Sources */,
 				58D0A7A820F7B95300B1ACAC /* CommandAndSerialViewController.swift in Sources */,
@@ -532,6 +550,7 @@
 				58EDC57420BE3E7F00CCCE77 /* DeviceSimulator.swift in Sources */,
 				587F17AB20DCE968004AE959 /* TestingViewModel.swift in Sources */,
 				5803ADE4210A830700AB7B76 /* BLEDeviceDiscovered.swift in Sources */,
+				58C37761210FDC34005DB6AC /* BLEDeviceCompleteInfoViewController.swift in Sources */,
 				587F17AD20DCE978004AE959 /* TestingViewController.swift in Sources */,
 				586009C020C7D46500A3326D /* TemporaryEncoderDecoder.swift in Sources */,
 				586009D420D9C19F00A3326D /* TimeTraveller.swift in Sources */,
@@ -539,6 +558,7 @@
 				586009BC20C7C71C00A3326D /* ElectronSimulator.swift in Sources */,
 				5803ADE0210A80D700AB7B76 /* BLEDeviceSelectionViewModel.swift in Sources */,
 				587F17AF20DDCD2A004AE959 /* TestCommandTableViewCell.swift in Sources */,
+				58C3775B210F5C15005DB6AC /* BLEPeripheralWrapper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

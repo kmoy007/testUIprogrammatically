@@ -8,7 +8,7 @@
 
 import Foundation
 import CoreBluetooth
-import RxSwift
+import RxCocoa
 
 class BLEDeviceSelectionViewModel : NSObject, CBCentralManagerDelegate
 {
@@ -18,7 +18,18 @@ class BLEDeviceSelectionViewModel : NSObject, CBCentralManagerDelegate
         centralManager = CBCentralManager(delegate: self, queue: nil)
     }
     
-    let btStateString: Variable<String> = Variable("unset");
+    deinit
+    {
+        print("deinit BLEDeviceSelectionViewModel")
+    }
+    
+    var centralManager:CBCentralManager!
+    let btStateString: BehaviorRelay<String> = BehaviorRelay(value: "unset");
+    let devices : BehaviorRelay<[BLEDeviceDiscovered]> = BehaviorRelay(value: [BLEDeviceDiscovered]())
+    let blockUI : BehaviorRelay<Bool> = BehaviorRelay(value: false)
+    var scanSeconds = 5;
+    var timer = Timer()
+    var firstScan = true;
     
     private func getBTStateAtString() -> String
     {
@@ -37,15 +48,55 @@ class BLEDeviceSelectionViewModel : NSObject, CBCentralManagerDelegate
         case CBManagerState.poweredOn:
             if centralManager.isScanning
             {
-                return "Bluetooth ON - Scanning"
+                return "Bluetooth ON - Scanning \(scanSeconds)s"
             }
             else
             {
                 return "Bluetooth ON - Not Scanning"
             }
         }
+      //  return "This cant happen";
+    }
+    
+    func startScanForDevices()
+    {
+        if (centralManager.isScanning)
+        {
+            return;
+        }
+        centralManager.scanForPeripherals(withServices: nil, options: nil)
+        //start the timer
+        scanSeconds = 5;
+        timer = Timer.scheduledTimer(timeInterval: 1, target: self,   selector: (#selector(self.updateTimer)), userInfo: nil, repeats: true)
         
-        return "This shouldnt happen";
+    }
+    
+    func stopScanForDevices()
+    {
+        timer.invalidate() //stop the timer
+        centralManager.stopScan();
+        btStateString.accept(getBTStateAtString());
+    }
+    
+    @objc func updateTimer() {
+        if scanSeconds == 0
+        {
+            stopScanForDevices();
+        }
+        else
+        {
+            scanSeconds -= 1     //This will decrement(count down)the seconds.
+            btStateString.accept(getBTStateAtString());
+        }
+        
+    }
+    
+    func connectDevice(device: BLEDeviceDiscovered)
+    {
+        var thePeripheral = BLEPeripheralWrapper(discoveredPeripheral: device.peripheralObj)
+        centralManager.connect(device.peripheralObj);
+
+        
     }
     
     func centralManagerDidUpdateState(_ central: CBCentralManager) {
@@ -53,12 +104,19 @@ class BLEDeviceSelectionViewModel : NSObject, CBCentralManagerDelegate
         
         if (central.state == CBManagerState.poweredOn)
         {
-            centralManager.scanForPeripherals(withServices: nil, options: nil)
+            if (firstScan == true) //trigger a scan when this class is first created
+            {
+                firstScan = false
+                startScanForDevices();
+            }
         }
         
-        btStateString.value = getBTStateAtString();
-        
-        viewController?.refresh();
+        btStateString.accept(getBTStateAtString());
+    }
+    
+    func triggerUIReload()
+    {
+        devices.accept(devices.value)//this smells bad
     }
     
     func centralManager(_ central: CBCentralManager,
@@ -71,34 +129,37 @@ class BLEDeviceSelectionViewModel : NSObject, CBCentralManagerDelegate
             let newDevice = BLEDeviceDiscovered(name: devicename, rssiInt: Int(truncating: RSSI), peripheral: peripheral)
         
            // print("peripheral: \(peripheral)")
-            if let alreadyExistingDevice = devices.first(where: {$0 == newDevice})
+            if let alreadyExistingDevice = devices.value.first(where: {$0 == newDevice})
             {
                 alreadyExistingDevice.rssi = Int(truncating: RSSI);
                 alreadyExistingDevice.lastSuccess = Date()
+                devices.accept(devices.value)//this smells bad
             }
             else
             {
-                devices.append(newDevice);
+                devices.accept(devices.value + [newDevice])
             }
         }
-        
-        viewController?.refresh();
+
     }
     
-    
-    weak var viewController : BLEDeviceSelectionViewController?
-    
-    var devices = [BLEDeviceDiscovered]()
-    
-    var centralManager:CBCentralManager!
-    var aDevice:CBPeripheral?
-    
-    func createDevices()
+    func centralManager(_ manager: CBCentralManager, didConnect: CBPeripheral)
     {
-        
-        
-        //devices.append(BLEDeviceDiscovered(name: "first device"));
-        //devices.append(BLEDeviceDiscovered(name: "another device"));
-        
+        //Invoked when a connection is successfully created with a peripheral.
+        print("Connection Success: \(String(describing: didConnect.name))")
+        triggerUIReload()
+    }
+    func centralManager(_ manager: CBCentralManager, didDisconnectPeripheral: CBPeripheral, error: Error?)
+    {
+        print("Connection Teardown: \(String(describing: didDisconnectPeripheral.name)) Error: \(String(describing: error))")
+        //Invoked when an existing connection with a peripheral is torn down.
+        triggerUIReload()
+    }
+    
+    func centralManager(_ manager: CBCentralManager, didFailToConnect: CBPeripheral, error: Error?)
+    {
+        print("Connection Failed: \(String(describing: didFailToConnect.name)) Error: \(String(describing: error))")
+        //Invoked when the central manager fails to create a connection with a peripheral.
+        triggerUIReload()
     }
 }

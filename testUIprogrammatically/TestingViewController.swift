@@ -10,6 +10,11 @@ import UIKit
 
 class TestingViewController: UIViewController, UITableViewDelegate, UITableViewDataSource
 {
+    deinit
+    {
+        print("deinit TestingViewController")
+    }
+    
     let viewModel = TestingViewModel();
     private var myTableView: UITableView!
     

@@ -73,13 +73,15 @@ class BLEFriendSimulatorTests: XCTestCase {
         
         theSubject.ATCommandFilter(incomingMessage: "+++\n".data(using: .utf8)!)
         XCTAssertEqual(theSubject.connectionMode, BLEMode.data)  //simple toggle, empty return
-        XCTAssertEqual(theDelegate.receivedStrings.count, 1)
-        XCTAssertEqual(theDelegate.receivedStrings[0], "OK\r\n")
+        XCTAssertEqual(theDelegate.receivedStrings.count, 2)
+        XCTAssertEqual(theDelegate.receivedStrings[0], "0\r\n")
+        XCTAssertEqual(theDelegate.receivedStrings[1], "OK\r\n")
         
         theSubject.ATCommandFilter(incomingMessage: "+++\n".data(using: .utf8)!)
         XCTAssertEqual(theSubject.connectionMode, BLEMode.command)  //simple toggle, empty return
-        XCTAssertEqual(theDelegate.receivedStrings.count, 2)
-        XCTAssertEqual(theDelegate.receivedStrings[1], "OK\r\n")
+        XCTAssertEqual(theDelegate.receivedStrings.count, 4)
+        XCTAssertEqual(theDelegate.receivedStrings[2], "1\r\n")
+        XCTAssertEqual(theDelegate.receivedStrings[3], "OK\r\n")
         
         
  /*       let result2 = theSubject.filterForToggleMode(incomingMessage: "+++\nblah".utf8CString) //with return

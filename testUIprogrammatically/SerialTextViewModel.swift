@@ -13,6 +13,11 @@ import RxCocoa
 
 class SerialTextViewModel : ReceiveMessageDelegate
 {
+    deinit
+    {
+        print("deinit SerialTextViewModel")
+    }
+    
     weak var serialTextView : SerialTextViewController? // for now - this needs to be replaced with RxSwift Observer pattern
     
     var downStream : SendMessageFormattingBuffer? {

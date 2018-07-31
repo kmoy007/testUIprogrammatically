@@ -14,6 +14,8 @@ class BLEDeviceSelectionTableViewCell: UITableViewCell {
     let deviceName_label = UILabel()
     let labMessage = UILabel()
     let lastSuccessTime_label = UILabel()
+    let connectionState_label = UILabel()
+    let info_button = UIButton(type: UIButtonType.infoLight)
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -21,21 +23,29 @@ class BLEDeviceSelectionTableViewCell: UITableViewCell {
         deviceName_label.translatesAutoresizingMaskIntoConstraints = false
         labMessage.translatesAutoresizingMaskIntoConstraints = false
         lastSuccessTime_label.translatesAutoresizingMaskIntoConstraints = false
+        connectionState_label.translatesAutoresizingMaskIntoConstraints = false
+        info_button.translatesAutoresizingMaskIntoConstraints = false
         
         contentView.addSubview(deviceName_label)
         contentView.addSubview(labMessage)
         contentView.addSubview(lastSuccessTime_label)
+        contentView.addSubview(connectionState_label)
+        contentView.addSubview(info_button)
         
         let viewsDict = [
             "deviceName" : deviceName_label,
             "message" : labMessage,
             "lastSuccessTime" : lastSuccessTime_label,
+            "connectionState" : connectionState_label,
+            "info_button" :info_button,
             ] as [String : Any]
         
        
-        contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-[deviceName]-[lastSuccessTime]-|", options: [], metrics: nil, views: viewsDict))
+        contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-[deviceName]-[lastSuccessTime]-[info_button]-|", options: [], metrics: nil, views: viewsDict))
         contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-[deviceName]-[message]-|", options: [], metrics: nil, views: viewsDict))
-        contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-[message]-|", options: [], metrics: nil, views: viewsDict))
+         contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-[info_button]-|", options: [], metrics: nil, views: viewsDict))
+        contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-[lastSuccessTime]-[connectionState]-|", options: [], metrics: nil, views: viewsDict))
+        contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-[message]-[connectionState]-[info_button]-|", options: [], metrics: nil, views: viewsDict))
     }
     
     required init?(coder aDecoder: NSCoder) {

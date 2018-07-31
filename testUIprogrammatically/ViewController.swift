@@ -10,7 +10,7 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    let theViewController = BLEDeviceSelectionViewController()//CommandAndSerialViewController()//TestingViewController()//SerialTextViewController()
+   // let theViewController = BLEDeviceSelectionViewController()//CommandAndSerialViewController()//TestingViewController()//SerialTextViewController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,6 +22,10 @@ class ViewController: UIViewController {
         self.view.addGestureRecognizer(tap)
         // Do any additional setup after loading the view, typically from a nib.
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)        
+    }
 
     // called by gesture recognizer
     @objc func tapHandler(gesture: UITapGestureRecognizer) {
@@ -30,7 +34,10 @@ class ViewController: UIViewController {
        // assert(false)
         if  gesture.state == .ended
         {
-            if self.navigationController?.pushViewController(theViewController, animated: true) == nil
+            let viewModel = BLEDeviceSelectionViewModel()
+            let viewController = BLEDeviceSelectionViewController()
+            viewController.viewModel = viewModel
+            if self.navigationController?.pushViewController(viewController, animated: true) == nil
             {
                 print("ERROR")
                 assert(false)

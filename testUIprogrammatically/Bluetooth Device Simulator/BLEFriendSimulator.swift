@@ -185,10 +185,12 @@ class BLEFriendSimulator
         if connectionMode == BLEMode.command
         {
             connectionMode = BLEMode.data
+            upStreamDevice?.receiveStringFromUART(receive: "0\r\n".data(using: .utf8)!)
         }
         else
         {
             connectionMode = BLEMode.command
+            upStreamDevice?.receiveStringFromUART(receive: "1\r\n".data(using: .utf8)!)
         }
         return true;
     }

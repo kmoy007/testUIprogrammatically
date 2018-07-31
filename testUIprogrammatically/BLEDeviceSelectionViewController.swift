@@ -12,31 +12,77 @@ import RxSwift
 
 class BLEDeviceSelectionViewController: UIViewController, UITableViewDelegate, UITableViewDataSource
 {
-    let disposeBag = DisposeBag()
-    let viewModel = BLEDeviceSelectionViewModel();
+    var viewModel : BLEDeviceSelectionViewModel?
+    
+    private let disposeBag = DisposeBag() //Rx
     
     private var myTableView: UITableView!
     private var bleStateLabel : UILabel = UILabel()
+    private var sv : UIView? //the spinner view
+    private let refreshControl = UIRefreshControl()
+    
+    deinit
+    {
+        print ("deinit BLEDeviceSelectionViewController")
+    }
     
     //MARK: Rx Setup
     private func setupBLEStateObserver() {
         //1
-        viewModel.btStateString.asObservable()
+        viewModel?.btStateString.asObservable()
             .subscribe(onNext: { //2
-                btStateString in
-                self.bleStateLabel.text = btStateString;
-                self.bleStateLabel.setNeedsDisplay();
+                [weak self] btStateString in
+                self?.bleStateLabel.text = btStateString;
+                self?.bleStateLabel.setNeedsDisplay();
             })
-            .addDisposableTo(disposeBag) //3
+            .disposed(by:disposeBag)
     }
     
-    func refresh()
+    private func setupDiscoveredDevicesObserver() {
+        //1
+        viewModel?.devices.asObservable()
+            .subscribe(onNext: {
+                [weak self] devices in
+                self?.myTableView.reloadData()
+            })
+            .disposed(by:disposeBag)
+    }
+    
+    private func setupBlockUIObserver() {
+        //1
+        viewModel?.blockUI.asObservable()
+            .subscribe(onNext: {
+                [weak self] blockUI in
+                if (blockUI)
+                {
+                    if (self != nil)
+                    {
+                        self?.sv = UIViewController.displaySpinner(onView: self!.view)
+                    }
+                }
+                else
+                {
+                    if let spinnerView = self?.sv
+                    {
+                        UIViewController.removeSpinner(spinner: spinnerView)
+                    }
+                    self?.sv = nil;
+                }
+            })
+            .disposed(by:disposeBag)
+    }
+    
+    func setupRefreshControl()
     {
-    //    bleStateLabel.text = viewModel.getBTStateAtString()
-    //    bleStateLabel.setNeedsDisplay()
-        myTableView.reloadData() //redraw
+        myTableView.refreshControl = refreshControl
+        refreshControl.addTarget(self, action: #selector(startScan(_:)), for: .valueChanged)
     }
     
+    @objc func startScan(_ sender : Any)
+    {
+        viewModel?.startScanForDevices();
+        self.refreshControl.endRefreshing()
+    }
     func setupLayoutConstraints()
     {
         bleStateLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -71,11 +117,6 @@ class BLEDeviceSelectionViewController: UIViewController, UITableViewDelegate, U
     {
         bleStateLabel.numberOfLines = 1;
         bleStateLabel.text = "BLE State Here"
-       
-       /* let maxSize = CGSize(width: 200, height: 30)
-        let size = bleStateLabel.sizeThatFits(maxSize)
-        //bleStateLabel.sizeToFit()*/
-        
     }
     
     func setupTableView()
@@ -95,34 +136,47 @@ class BLEDeviceSelectionViewController: UIViewController, UITableViewDelegate, U
     override func viewDidAppear(_ animated: Bool)
     {
         super.viewDidAppear(animated);
-        //myTableView.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: self.view.frame.size.height)
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        viewModel.viewController = self;
+        if (viewModel == nil)
+        {
+            print("ERROR ViewModel is nil - BLEDeviceSelectionViewController")
+            assert(false)
+        }
         self.view.backgroundColor = UIColor.white;
         setupBleControlBar();
         setupTableView();
         setupLayoutConstraints();
         setupBLEStateObserver();
-        refresh();
+        setupDiscoveredDevicesObserver();
+        setupBlockUIObserver();
+        setupRefreshControl()
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.devices.count
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
+    {
+        if let concreteViewModel = viewModel
+        {
+            return concreteViewModel.devices.value.count
+        }
+        else
+        {
+            return 0;
+        }
     }
     
     // called when the cell is selected.
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
     {
-        
-        print("Num: \(indexPath.row)")
-        print("Name: \(viewModel.devices[indexPath.row].deviceName)")
+        if let concreteViewModel = viewModel
+        {
+            concreteViewModel.connectDevice(device: concreteViewModel.devices.value[indexPath.row])
+        }
         myTableView.reloadData() //redraw
     }
     
@@ -131,12 +185,55 @@ class BLEDeviceSelectionViewController: UIViewController, UITableViewDelegate, U
     {
         let cell = tableView.dequeueReusableCell(withIdentifier: "discoveredDeviceCell", for: indexPath) as! BLEDeviceSelectionTableViewCell
         
-        cell.deviceName_label.text = "\(viewModel.devices[indexPath.row].deviceName)"
-        cell.labMessage.text = "RSSI: \(viewModel.devices[indexPath.row].rssi)"
-        cell.lastSuccessTime_label.text = DateFormatter.localizedString(from: viewModel.devices[indexPath.row].lastSuccess as Date, dateStyle: .short, timeStyle: .short)
-        
+        if let concreteViewModel = viewModel
+        {
+            let thisDevice = concreteViewModel.devices.value[indexPath.row]
+            cell.deviceName_label.text = "\(thisDevice.deviceName)"
+            cell.labMessage.text = "RSSI: \(thisDevice.rssi)"
+            cell.connectionState_label.text = thisDevice.getConnectionStateAsString();
+            cell.lastSuccessTime_label.text = DateFormatter.localizedString(from: thisDevice.lastSuccess as Date, dateStyle: .short, timeStyle: .short)
+            if (thisDevice.isConnected)
+            {
+                cell.info_button.tag = indexPath.row
+                cell.info_button.addTarget(self, action: #selector(displayInfo(sender:)), for: .touchUpInside)
+                cell.info_button.isHidden = false;
+            }
+            else
+            {
+                cell.info_button.removeTarget(nil, action: nil, for: .allEvents) //remove all targets
+                cell.info_button.isHidden = true;
+            }
+        }
+
         return cell
   
+    }
+    
+    @objc func displayInfo(sender: UIButton)
+    {
+        if let concreteViewModel = viewModel
+        {
+            if (sender.tag >= 0) && (sender.tag < concreteViewModel.devices.value.count) //in range
+            {
+                let device = concreteViewModel.devices.value[sender.tag]
+                
+                let infoViewModel = BLEDeviceCompleteInfoViewModel(theDevice: device);
+                let infoViewController = BLEDeviceCompleteInfoViewController();
+                infoViewController.viewModel = infoViewModel;
+                if self.navigationController?.pushViewController(infoViewController, animated: true) == nil
+                {
+                    print("ERROR")
+                    assert(false)
+                }
+            }
+            else
+            {
+                let alertController = UIAlertController(title: "ERROR", message: "device is nil!", preferredStyle: UIAlertControllerStyle.alert)
+                alertController.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
+                self.present(alertController, animated:true, completion:nil)
+            }
+        }
+        
     }
     
 }

@@ -13,6 +13,11 @@ import RxCocoa
 
 class TestingViewModel 
 {
+    deinit
+    {
+        print("deinit TestingViewModel")
+    }
+    
     weak var viewController : TestingViewController?
     
     private var bleDeviceInterface : BLEDeviceInterface?

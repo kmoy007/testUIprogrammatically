@@ -19,6 +19,11 @@ class SerialTextViewController: UIViewController, UITextFieldDelegate
     var wordWrapSwitch : UISwitch = UISwitch()
     var sendTextLabel : UILabel = UILabel()
     
+    deinit
+    {
+        print("deinit SerialTextViewController")
+    }
+    
     var wordWrap: Bool  = true {
         didSet {
             textViewSetupSizeForWordWrapping()
