@@ -45,7 +45,8 @@ class BLEDeviceSelectionTableViewCell: UITableViewCell {
         contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-[deviceName]-[message]-|", options: [], metrics: nil, views: viewsDict))
          contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-[info_button]-|", options: [], metrics: nil, views: viewsDict))
         contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-[lastSuccessTime]-[connectionState]-|", options: [], metrics: nil, views: viewsDict))
-        contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-[message]-[connectionState]-[info_button]-|", options: [], metrics: nil, views: viewsDict))
+        contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-[message]", options: [], metrics: nil, views: viewsDict))
+         contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:[connectionState]-[info_button]-|", options: [], metrics: nil, views: viewsDict))
         
         setTextColor(color: .black)
     }

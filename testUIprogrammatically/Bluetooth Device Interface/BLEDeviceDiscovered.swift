@@ -30,18 +30,21 @@ class BLEDeviceDiscovered : NSObject, CBPeripheralDelegate
     var rssi = 0
     var hasUART = false
     let peripheralObj : CBPeripheral
+    let advertStrings: [String]
     var isConnected : Bool{
         get{ return peripheralObj.state == CBPeripheralState.connected }
     }
   
-    init(name : String, rssiInt: Int, peripheral: CBPeripheral)
+    init(name : String, rssiInt: Int, peripheral: CBPeripheral, advertStrings: [String])
     {
         peripheralObj = peripheral
+        self.advertStrings = advertStrings;
         super.init()
         deviceName = name
         rssi = rssiInt
         lastSuccess = Date();
         peripheralObj.delegate = self
+        
     }
     
     func getConnectionStateAsString() -> String

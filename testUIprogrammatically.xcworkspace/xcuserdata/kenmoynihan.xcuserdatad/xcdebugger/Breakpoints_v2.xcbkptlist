@@ -1193,7 +1193,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "testUIprogrammatically/TestingViewController.swift"
-            timestampString = "554745143.65714"
+            timestampString = "554774470.677719"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "36"
@@ -1209,7 +1209,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "testUIprogrammatically/TestingViewController.swift"
-            timestampString = "554745143.6573189"
+            timestampString = "554774470.677793"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "99"
@@ -1491,7 +1491,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "testUIprogrammatically/TestingViewController.swift"
-            timestampString = "554745143.658805"
+            timestampString = "554774470.678075"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "46"
@@ -1507,7 +1507,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "testUIprogrammatically/TestingViewController.swift"
-            timestampString = "554745143.658901"
+            timestampString = "554774470.6781321"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "34"
@@ -1523,7 +1523,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "testUIprogrammatically/TestingViewController.swift"
-            timestampString = "554745143.65898"
+            timestampString = "554774470.678183"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "33"
@@ -1539,11 +1539,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "testUIprogrammatically/BLEDeviceSelectionViewController.swift"
-            timestampString = "554767276.580621"
+            timestampString = "555122368.9060791"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "88"
-            endingLineNumber = "88"
+            startingLineNumber = "91"
+            endingLineNumber = "91"
             landmarkName = "setupLayoutConstraints()"
             landmarkType = "7">
          </BreakpointContent>
@@ -1555,11 +1555,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "testUIprogrammatically/BLEDeviceSelectionViewModel.swift"
-            timestampString = "554767276.5807"
+            timestampString = "555122368.906633"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "123"
-            endingLineNumber = "123"
+            startingLineNumber = "160"
+            endingLineNumber = "160"
             landmarkName = "BLEDeviceSelectionViewModel"
             landmarkType = "3">
          </BreakpointContent>
@@ -1571,7 +1571,23 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "testUIprogrammatically/BLEDeviceSelectionViewController.swift"
-            timestampString = "554767276.581123"
+            timestampString = "555122368.906728"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "39"
+            endingLineNumber = "39"
+            landmarkName = "setupBLEStateObserver()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "testUIprogrammatically/BLEDeviceSelectionViewController.swift"
+            timestampString = "555122368.907159"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "37"
@@ -1586,28 +1602,12 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "testUIprogrammatically/BLEDeviceSelectionViewController.swift"
-            timestampString = "554767276.581185"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "35"
-            endingLineNumber = "35"
-            landmarkName = "setupBLEStateObserver()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "testUIprogrammatically/BLEDeviceSelectionViewModel.swift"
-            timestampString = "554767276.5812401"
+            timestampString = "555122368.90757"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "148"
-            endingLineNumber = "148"
+            startingLineNumber = "188"
+            endingLineNumber = "188"
             landmarkName = "centralManager(_:didDiscover:advertisementData:rssi:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1619,11 +1619,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "testUIprogrammatically/BLEDeviceSelectionViewModel.swift"
-            timestampString = "554767276.581543"
+            timestampString = "555122368.9076591"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "168"
-            endingLineNumber = "168"
+            startingLineNumber = "208"
+            endingLineNumber = "208"
             landmarkName = "centralManager(_:didConnect:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1635,11 +1635,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "testUIprogrammatically/BLEDeviceSelectionViewModel.swift"
-            timestampString = "554767276.581833"
+            timestampString = "555122368.9077441"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "170"
-            endingLineNumber = "170"
+            startingLineNumber = "210"
+            endingLineNumber = "210"
             landmarkName = "centralManager(_:didConnect:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1715,11 +1715,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "testUIprogrammatically/BLEDeviceSelectionViewModel.swift"
-            timestampString = "554767276.582154"
+            timestampString = "555122368.907869"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "87"
-            endingLineNumber = "87"
+            startingLineNumber = "124"
+            endingLineNumber = "124"
             landmarkName = "updateTimer()"
             landmarkType = "7">
          </BreakpointContent>
@@ -1731,11 +1731,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "testUIprogrammatically/BLEDeviceSelectionViewController.swift"
-            timestampString = "554767276.582448"
+            timestampString = "555122368.907961"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "83"
-            endingLineNumber = "83"
+            startingLineNumber = "85"
+            endingLineNumber = "85"
             landmarkName = "startScan(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1747,11 +1747,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "testUIprogrammatically/BLEDeviceSelectionViewModel.swift"
-            timestampString = "554767276.582509"
+            timestampString = "555122368.9083771"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "72"
-            endingLineNumber = "72"
+            startingLineNumber = "109"
+            endingLineNumber = "109"
             landmarkName = "startScanForDevices()"
             landmarkType = "7">
          </BreakpointContent>
@@ -1763,11 +1763,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "testUIprogrammatically/BLEDeviceSelectionViewModel.swift"
-            timestampString = "554767276.58279"
+            timestampString = "555122368.9084671"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "68"
-            endingLineNumber = "68"
+            startingLineNumber = "105"
+            endingLineNumber = "105"
             landmarkName = "startScanForDevices()"
             landmarkType = "7">
          </BreakpointContent>
@@ -1891,11 +1891,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "testUIprogrammatically/BLEDeviceSelectionViewController.swift"
-            timestampString = "554767276.583204"
+            timestampString = "555122368.908667"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "26"
-            endingLineNumber = "26"
+            startingLineNumber = "28"
+            endingLineNumber = "28"
             landmarkName = "deinit"
             landmarkType = "7">
          </BreakpointContent>
@@ -1907,11 +1907,27 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "testUIprogrammatically/Bluetooth Device Interface/BLEDeviceDiscovered.swift"
-            timestampString = "554767276.583372"
+            timestampString = "555122368.909199"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "67"
-            endingLineNumber = "67"
+            startingLineNumber = "70"
+            endingLineNumber = "70"
+            landmarkName = "BLEDeviceDiscovered"
+            landmarkType = "3">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "testUIprogrammatically/Bluetooth Device Interface/BLEDeviceDiscovered.swift"
+            timestampString = "555122368.909291"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "76"
+            endingLineNumber = "76"
             landmarkName = "UpdateServicesOffered()"
             landmarkType = "7">
          </BreakpointContent>
@@ -1922,13 +1938,29 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "testUIprogrammatically/Bluetooth Device Interface/BLEDeviceDiscovered.swift"
-            timestampString = "554767276.583433"
+            filePath = "testUIprogrammatically/BLEDeviceSelectionViewController.swift"
+            timestampString = "555122368.909361"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "73"
-            endingLineNumber = "73"
-            landmarkName = "UpdateServicesOffered()"
+            startingLineNumber = "229"
+            endingLineNumber = "229"
+            landmarkName = "tableView(_:cellForRowAt:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "testUIprogrammatically/BLEDeviceSelectionViewController.swift"
+            timestampString = "555122368.909739"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "231"
+            endingLineNumber = "231"
+            landmarkName = "tableView(_:cellForRowAt:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

@@ -10,6 +10,21 @@ import Foundation
 import CoreBluetooth
 import RxCocoa
 
+class PersistentDevice
+{
+    let uuid : UUID
+    let name : String
+    var lastSeenTime: Date
+
+    init(uuid: UUID, name : String)
+    {
+        self.uuid = uuid
+        self.name = name
+        lastSeenTime = Date()
+    }
+    
+}
+
 class BLEDeviceSelectionViewModel : NSObject, CBCentralManagerDelegate , BLEDeviceDelegate
 {
     func stateChange(device: BLEDeviceDiscovered) {
@@ -20,8 +35,15 @@ class BLEDeviceSelectionViewModel : NSObject, CBCentralManagerDelegate , BLEDevi
     {
         super.init()
         centralManager = CBCentralManager(delegate: self, queue: nil)
+        
+        CreateTemporaryPersistentDevices()
+        
     }
-    
+    func CreateTemporaryPersistentDevices()
+    {
+        persistentDevices.append(PersistentDevice(uuid: UUID(uuidString: "EF090000-12D6-42BA-93B8-9DD7EC090AA4")!, name: "dummyThing1"));
+        persistentDevices.append(PersistentDevice(uuid: UUID(uuidString: "9FF1F269-742B-27ED-CD04-7564904E59B7")!, name: "dummyThing2"));
+    }
     deinit
     {
         print("deinit BLEDeviceSelectionViewModel")
@@ -34,6 +56,7 @@ class BLEDeviceSelectionViewModel : NSObject, CBCentralManagerDelegate , BLEDevi
     var scanSeconds = 5;
     var timer = Timer()
     var firstScan = true;
+    var persistentDevices = [PersistentDevice]()
     
     private func getBTStateAtString() -> String
     {
@@ -61,6 +84,20 @@ class BLEDeviceSelectionViewModel : NSObject, CBCentralManagerDelegate , BLEDevi
         }
       //  return "This cant happen";
     }
+    
+    func isUUIDinDeviceList(uuid: UUID) -> Bool
+    {
+        for device in devices.value
+        {
+            if device.peripheralObj.identifier == uuid
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    
     
     func startScanForDevices()
     {
@@ -128,13 +165,16 @@ class BLEDeviceSelectionViewModel : NSObject, CBCentralManagerDelegate , BLEDevi
     {
         if let devicename = peripheral.name
         {
+            var advertStrings = [String]();
             print ("Found: \(devicename).  Advertising:")
+            print ("iOS UUID: \(peripheral.identifier.uuidString)")
             for advert in advertisementData
             {
-                print("Key: \(advert.key) - Data: <\(advert.value)>")
+                advertStrings.append(String("Key: \(advert.key) - Data: <\(advert.value)>"))
+                print(advertStrings.last!)
             }
             
-            let newDevice = BLEDeviceDiscovered(name: devicename, rssiInt: Int(truncating: RSSI), peripheral: peripheral)
+            let newDevice = BLEDeviceDiscovered(name: devicename, rssiInt: Int(truncating: RSSI), peripheral: peripheral, advertStrings: advertStrings)
             if let serviceUUIDs_Any = advertisementData[CBAdvertisementDataServiceUUIDsKey]
             {
                 let serviceUUIDs = serviceUUIDs_Any as! [CBUUID]

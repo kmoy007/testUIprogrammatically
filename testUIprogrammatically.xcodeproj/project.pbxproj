@@ -11,6 +11,7 @@
 		5803ADE0210A80D700AB7B76 /* BLEDeviceSelectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5803ADDF210A80D700AB7B76 /* BLEDeviceSelectionViewModel.swift */; };
 		5803ADE2210A820F00AB7B76 /* BLEDeviceSelectionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5803ADE1210A820F00AB7B76 /* BLEDeviceSelectionTableViewCell.swift */; };
 		5803ADE4210A830700AB7B76 /* BLEDeviceDiscovered.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5803ADE3210A830700AB7B76 /* BLEDeviceDiscovered.swift */; };
+		5859DD6821167BCA005B790C /* BLEDeviceTableViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5859DD6721167BCA005B790C /* BLEDeviceTableViewCellViewModel.swift */; };
 		586009BC20C7C71C00A3326D /* ElectronSimulator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 586009BB20C7C71C00A3326D /* ElectronSimulator.swift */; };
 		586009BE20C7C74D00A3326D /* ElectronSimulatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 586009BD20C7C74D00A3326D /* ElectronSimulatorTests.swift */; };
 		586009C020C7D46500A3326D /* TemporaryEncoderDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 586009BF20C7D46500A3326D /* TemporaryEncoderDecoder.swift */; };
@@ -78,6 +79,7 @@
 		5803ADDF210A80D700AB7B76 /* BLEDeviceSelectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLEDeviceSelectionViewModel.swift; sourceTree = "<group>"; };
 		5803ADE1210A820F00AB7B76 /* BLEDeviceSelectionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLEDeviceSelectionTableViewCell.swift; sourceTree = "<group>"; };
 		5803ADE3210A830700AB7B76 /* BLEDeviceDiscovered.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLEDeviceDiscovered.swift; sourceTree = "<group>"; };
+		5859DD6721167BCA005B790C /* BLEDeviceTableViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLEDeviceTableViewCellViewModel.swift; sourceTree = "<group>"; };
 		586009BB20C7C71C00A3326D /* ElectronSimulator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElectronSimulator.swift; sourceTree = "<group>"; };
 		586009BD20C7C74D00A3326D /* ElectronSimulatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElectronSimulatorTests.swift; sourceTree = "<group>"; };
 		586009BF20C7D46500A3326D /* TemporaryEncoderDecoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemporaryEncoderDecoder.swift; sourceTree = "<group>"; };
@@ -228,6 +230,7 @@
 				58C3775E210FDC24005DB6AC /* BLEDeviceCompleteInfoViewModel.swift */,
 				58C37760210FDC34005DB6AC /* BLEDeviceCompleteInfoViewController.swift */,
 				5803ADDD210A80BD00AB7B76 /* BLEDeviceSelectionViewController.swift */,
+				5859DD6721167BCA005B790C /* BLEDeviceTableViewCellViewModel.swift */,
 				5803ADE1210A820F00AB7B76 /* BLEDeviceSelectionTableViewCell.swift */,
 				5803ADDF210A80D700AB7B76 /* BLEDeviceSelectionViewModel.swift */,
 				58C3775C210FB6BE005DB6AC /* ActivitySpinnerExtension.swift */,
@@ -540,6 +543,7 @@
 				58C3775D210FB6BE005DB6AC /* ActivitySpinnerExtension.swift in Sources */,
 				586009CD20CD3E2000A3326D /* ThreadedReceiveMessageDelegate.swift in Sources */,
 				58A8712A20BA62FB00F83A41 /* SerialTextViewModel.swift in Sources */,
+				5859DD6821167BCA005B790C /* BLEDeviceTableViewCellViewModel.swift in Sources */,
 				58C3775F210FDC24005DB6AC /* BLEDeviceCompleteInfoViewModel.swift in Sources */,
 				58D0A7A620F58E0D00B1ACAC /* DummyCommandTableViewCell.swift in Sources */,
 				58A8712D20BA6ECE00F83A41 /* BLEFriend_SendMessageFormattingBuffer.swift in Sources */,

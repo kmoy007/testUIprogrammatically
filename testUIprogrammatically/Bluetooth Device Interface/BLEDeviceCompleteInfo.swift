@@ -62,7 +62,14 @@ class BLEDeviceCompleteInfo : NSObject, CBPeripheralDelegate
         }
         
         strings.append((level, "Connection State: \(bleDevice.getConnectionStateAsString())"));
-        
+        strings.append((level, "iOS local UUID: (probably valid for this iOS device only) \(bleDevice.peripheralObj.identifier.uuidString) "));
+        strings.append((level, "Advertisment Data:"))
+        level+=1
+        for advert in bleDevice.advertStrings
+        {
+            strings.append((level, advert));
+        }
+        level -= 1
         if let concreteServices = bleDevice.peripheralObj.services
         {
             strings.append((level, "Service Count: \(concreteServices.count)"));

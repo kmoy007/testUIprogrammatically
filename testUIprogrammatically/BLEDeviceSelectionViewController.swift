@@ -21,6 +21,8 @@ class BLEDeviceSelectionViewController: UIViewController, UITableViewDelegate, U
     private var sv : UIView? //the spinner view
     private let refreshControl = UIRefreshControl()
     
+    private let sections = ["Discovered Devices", "Stored Devices"]
+    
     deinit
     {
         print ("deinit BLEDeviceSelectionViewController")
@@ -83,21 +85,11 @@ class BLEDeviceSelectionViewController: UIViewController, UITableViewDelegate, U
         viewModel?.startScanForDevices();
         self.refreshControl.endRefreshing()
     }
+    
     func setupLayoutConstraints()
     {
         bleStateLabel.translatesAutoresizingMaskIntoConstraints = false
         myTableView.translatesAutoresizingMaskIntoConstraints = false
-        
-       /* bleStateLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-        bleStateLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-        bleStateLabel.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
-        bleStateLabel.bottomAnchor.constraint(equalTo: myTableView.topAnchor).isActive = true
-        
-        myTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-        myTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-        myTableView.topAnchor.constraint(equalTo: bleStateLabel.bottomAnchor).isActive = true
-        myTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
-        */
         
         self.view.addSubview(bleStateLabel)
         self.view.addSubview(myTableView)
@@ -106,7 +98,6 @@ class BLEDeviceSelectionViewController: UIViewController, UITableViewDelegate, U
             "bleStateLabel" : bleStateLabel,
             "tableView" : myTableView,
             ] as [String : Any]
-        
         
         view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-[bleStateLabel]-|", options: [], metrics: nil, views: viewsDict))
         view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-[tableView]-|", options: [], metrics: nil, views: viewsDict))
@@ -158,95 +149,120 @@ class BLEDeviceSelectionViewController: UIViewController, UITableViewDelegate, U
         super.didReceiveMemoryWarning()
     }
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
+    @objc func displayInfoViewForDevice(sender: UIButton)
     {
-        if let concreteViewModel = viewModel
-        {
-            return concreteViewModel.devices.value.count
+        guard let concreteViewModel = viewModel else {
+            return
         }
-        else
-        {
-            return 0;
+        
+        if (sender.tag >= 0) && (sender.tag < concreteViewModel.devices.value.count) { //in range
+            let device = concreteViewModel.devices.value[sender.tag]
+            
+            let infoViewModel = BLEDeviceCompleteInfoViewModel(theDevice: device);
+            let infoViewController = BLEDeviceCompleteInfoViewController();
+            infoViewController.viewModel = infoViewModel;
+            if self.navigationController?.pushViewController(infoViewController, animated: true) == nil
+            {
+                print("ERROR")
+                assert(false)
+            }
+        }
+        else {
+            let alertController = UIAlertController(title: "ERROR", message: "device is nil!", preferredStyle: UIAlertControllerStyle.alert)
+            alertController.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
+            self.present(alertController, animated:true, completion:nil)
         }
     }
     
-    // called when the cell is selected.
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
-    {
-        if let concreteViewModel = viewModel
+    {   //TABLEVIEW - cell selected
+        guard let concreteViewModel = viewModel else {
+            return
+        }
+        
+        if indexPath.section == 0
         {
             concreteViewModel.connectDevice(device: concreteViewModel.devices.value[indexPath.row])
         }
         myTableView.reloadData() //redraw
     }
     
-    func setTextColor(color: UIColor)
-    {
-        
-    }
-    
-    // return cells
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
-    {
+    {   //TABLEVIEW - return cells
         let cell = tableView.dequeueReusableCell(withIdentifier: "discoveredDeviceCell", for: indexPath) as! BLEDeviceSelectionTableViewCell
         
-        if let concreteViewModel = viewModel
+        guard let concreteViewModel = viewModel else {
+            return cell
+        }
+
+        if (indexPath.section == 0)
         {
-            let thisDevice = concreteViewModel.devices.value[indexPath.row]
-            cell.deviceName_label.text = "\(thisDevice.deviceName)"
+            let deviceVM = BLEDeviceTableViewCellViewModel(device: concreteViewModel.devices.value[indexPath.row])
             
-            var uartString = ""
-            cell.setTextColor(color: .black)
-            if (thisDevice.hasUART)
-            {
-                cell.setTextColor(color: .blue)
-                uartString = " UART"
-            }
-            cell.labMessage.text = "RSSI: \(thisDevice.rssi) \(uartString)"
-            cell.connectionState_label.text = thisDevice.getConnectionStateAsString();
-            cell.lastSuccessTime_label.text = DateFormatter.localizedString(from: thisDevice.lastSuccess as Date, dateStyle: .short, timeStyle: .short)
-            if (thisDevice.isConnected)
+            cell.setTextColor(color: deviceVM.getTextColorForDisplay())
+            cell.deviceName_label.text = deviceVM.getDeviceNameForDisplay();
+            cell.labMessage.text = deviceVM.getDeviceMessageForDisplay()
+            cell.connectionState_label.text = deviceVM.getConnectionStateAsString()
+            cell.lastSuccessTime_label.text = deviceVM.getLastSuccessTime()
+            
+            if (deviceVM.getShouldShowDeviceInfoButton())
             {
                 cell.info_button.tag = indexPath.row
-                cell.info_button.addTarget(self, action: #selector(displayInfo(sender:)), for: .touchUpInside)
-                cell.info_button.isHidden = false;
+                cell.info_button.addTarget(self, action: #selector(displayInfoViewForDevice(sender:)), for: .touchUpInside)
+                cell.info_button.isEnabled = true;
             }
             else
             {
                 cell.info_button.removeTarget(nil, action: nil, for: .allEvents) //remove all targets
-                cell.info_button.isHidden = true;
+                cell.info_button.isEnabled = false;
             }
+        }
+        else
+        {
+            let thisDevice = concreteViewModel.persistentDevices[indexPath.row]
+            cell.deviceName_label.text = "\(thisDevice.name)"
+            if (concreteViewModel.isUUIDinDeviceList(uuid: thisDevice.uuid))
+            {
+                cell.labMessage.text = "it is detected above"
+            }
+            else
+            {
+                cell.labMessage.text = "not currently detected"
+            }
+            cell.connectionState_label.text = "persistence";
+            cell.lastSuccessTime_label.text = DateFormatter.localizedString(from: thisDevice.lastSeenTime as Date, dateStyle: .short, timeStyle: .short)
+            
+            cell.info_button.isEnabled = false;
         }
 
         return cell
   
     }
     
-    @objc func displayInfo(sender: UIButton)
-    {
-        if let concreteViewModel = viewModel
-        {
-            if (sender.tag >= 0) && (sender.tag < concreteViewModel.devices.value.count) //in range
-            {
-                let device = concreteViewModel.devices.value[sender.tag]
-                
-                let infoViewModel = BLEDeviceCompleteInfoViewModel(theDevice: device);
-                let infoViewController = BLEDeviceCompleteInfoViewController();
-                infoViewController.viewModel = infoViewModel;
-                if self.navigationController?.pushViewController(infoViewController, animated: true) == nil
-                {
-                    print("ERROR")
-                    assert(false)
-                }
-            }
-            else
-            {
-                let alertController = UIAlertController(title: "ERROR", message: "device is nil!", preferredStyle: UIAlertControllerStyle.alert)
-                alertController.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
-                self.present(alertController, animated:true, completion:nil)
-            }
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
+    {  //TABLEVIEW - How Many in this section?
+        guard let concreteViewModel = viewModel else {
+            return 0
         }
         
+        if section == 0 {
+            return concreteViewModel.devices.value.count
+        } else if section == 1 {
+            return concreteViewModel.persistentDevices.count
+        } else {
+            print ("SHOULD NEVER GET HERE")
+            assert(false)
+            return 0
+        }
     }
     
+    func numberOfSections(in tableView: UITableView) -> Int
+    {   //TABLEVIEW - How many sections?
+        return sections.count
+    }
+
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String?
+    {   //TABLEVIEW - Return the title of sections
+        return sections[section] as String
+    }
 }
