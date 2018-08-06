@@ -157,6 +157,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5859DD6921178F40005B790C /* BLEDeviceSelection */ = {
+			isa = PBXGroup;
+			children = (
+				58C3775E210FDC24005DB6AC /* BLEDeviceCompleteInfoViewModel.swift */,
+				58C37760210FDC34005DB6AC /* BLEDeviceCompleteInfoViewController.swift */,
+				5859DD6721167BCA005B790C /* BLEDeviceTableViewCellViewModel.swift */,
+				5803ADDD210A80BD00AB7B76 /* BLEDeviceSelectionViewController.swift */,
+				5803ADE1210A820F00AB7B76 /* BLEDeviceSelectionTableViewCell.swift */,
+				5803ADDF210A80D700AB7B76 /* BLEDeviceSelectionViewModel.swift */,
+			);
+			path = BLEDeviceSelection;
+			sourceTree = "<group>";
+		};
 		586009C520CCE30B00A3326D /* Bluetooth Device Interface */ = {
 			isa = PBXGroup;
 			children = (
@@ -226,13 +239,8 @@
 		587F4EC520B50425007C9416 /* testUIprogrammatically */ = {
 			isa = PBXGroup;
 			children = (
+				5859DD6921178F40005B790C /* BLEDeviceSelection */,
 				587F4EC620B50425007C9416 /* AppDelegate.swift */,
-				58C3775E210FDC24005DB6AC /* BLEDeviceCompleteInfoViewModel.swift */,
-				58C37760210FDC34005DB6AC /* BLEDeviceCompleteInfoViewController.swift */,
-				5803ADDD210A80BD00AB7B76 /* BLEDeviceSelectionViewController.swift */,
-				5859DD6721167BCA005B790C /* BLEDeviceTableViewCellViewModel.swift */,
-				5803ADE1210A820F00AB7B76 /* BLEDeviceSelectionTableViewCell.swift */,
-				5803ADDF210A80D700AB7B76 /* BLEDeviceSelectionViewModel.swift */,
 				58C3775C210FB6BE005DB6AC /* ActivitySpinnerExtension.swift */,
 				587F4EC820B50425007C9416 /* ViewController.swift */,
 				58D0A7A720F7B95300B1ACAC /* CommandAndSerialViewController.swift */,

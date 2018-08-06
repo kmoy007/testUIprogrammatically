@@ -21,7 +21,7 @@ class BLEDeviceSelectionViewController: UIViewController, UITableViewDelegate, U
     private var sv : UIView? //the spinner view
     private let refreshControl = UIRefreshControl()
     
-    private let sections = ["Discovered Devices", "Stored Devices"]
+    
     
     deinit
     {
@@ -194,31 +194,28 @@ class BLEDeviceSelectionViewController: UIViewController, UITableViewDelegate, U
         guard let concreteViewModel = viewModel else {
             return cell
         }
-
-        if (indexPath.section == 0)
+        
+        let deviceVM = concreteViewModel.getDeviceViewModel(section: indexPath.section, deviceNum: indexPath.row)
+        //BLEDeviceTableViewCellViewModel(device: concreteViewModel.devices.value[indexPath.row])
+        
+        cell.setTextColor(color: deviceVM.getTextColorForDisplay())
+        cell.deviceName_label.text = deviceVM.getDeviceNameForDisplay();
+        cell.labMessage.text = deviceVM.getDeviceMessageForDisplay()
+        cell.connectionState_label.text = deviceVM.getConnectionStateAsString()
+        cell.lastSuccessTime_label.text = deviceVM.getLastSuccessTime()
+        cell.info_button.tag = indexPath.row
+        
+        if (deviceVM.getShouldShowDeviceInfoButton())
         {
-            let deviceVM = BLEDeviceTableViewCellViewModel(device: concreteViewModel.devices.value[indexPath.row])
-            
-            cell.setTextColor(color: deviceVM.getTextColorForDisplay())
-            cell.deviceName_label.text = deviceVM.getDeviceNameForDisplay();
-            cell.labMessage.text = deviceVM.getDeviceMessageForDisplay()
-            cell.connectionState_label.text = deviceVM.getConnectionStateAsString()
-            cell.lastSuccessTime_label.text = deviceVM.getLastSuccessTime()
-            
-            if (deviceVM.getShouldShowDeviceInfoButton())
-            {
-                cell.info_button.tag = indexPath.row
-                cell.info_button.addTarget(self, action: #selector(displayInfoViewForDevice(sender:)), for: .touchUpInside)
-                cell.info_button.isEnabled = true;
-            }
-            else
-            {
-                cell.info_button.removeTarget(nil, action: nil, for: .allEvents) //remove all targets
-                cell.info_button.isEnabled = false;
-            }
+            cell.info_button.addTarget(self, action: #selector(displayInfoViewForDevice(sender:)), for: .touchUpInside)
+            cell.info_button.isEnabled = true;
         }
         else
         {
+            cell.info_button.removeTarget(nil, action: nil, for: .allEvents) //remove all targets
+            cell.info_button.isEnabled = false;
+        }
+     /*
             let thisDevice = concreteViewModel.persistentDevices[indexPath.row]
             cell.deviceName_label.text = "\(thisDevice.name)"
             if (concreteViewModel.isUUIDinDeviceList(uuid: thisDevice.uuid))
@@ -233,7 +230,7 @@ class BLEDeviceSelectionViewController: UIViewController, UITableViewDelegate, U
             cell.lastSuccessTime_label.text = DateFormatter.localizedString(from: thisDevice.lastSeenTime as Date, dateStyle: .short, timeStyle: .short)
             
             cell.info_button.isEnabled = false;
-        }
+        }*/
 
         return cell
   
@@ -244,25 +241,23 @@ class BLEDeviceSelectionViewController: UIViewController, UITableViewDelegate, U
         guard let concreteViewModel = viewModel else {
             return 0
         }
-        
-        if section == 0 {
-            return concreteViewModel.devices.value.count
-        } else if section == 1 {
-            return concreteViewModel.persistentDevices.count
-        } else {
-            print ("SHOULD NEVER GET HERE")
-            assert(false)
-            return 0
-        }
+        return concreteViewModel.getCountInSection(sectionNumber: section);
     }
     
     func numberOfSections(in tableView: UITableView) -> Int
     {   //TABLEVIEW - How many sections?
-        return sections.count
+        guard let concreteViewModel = viewModel else {
+            return 0
+        }
+        return concreteViewModel.numSections
     }
 
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String?
     {   //TABLEVIEW - Return the title of sections
-        return sections[section] as String
+        guard let concreteViewModel = viewModel else {
+            return "EMPTY"
+        }
+        
+        return concreteViewModel.getSectionName(sectionNumber: section)
     }
 }

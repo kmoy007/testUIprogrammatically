@@ -15,18 +15,75 @@ class PersistentDevice
     let uuid : UUID
     let name : String
     var lastSeenTime: Date
-
+    
     init(uuid: UUID, name : String)
     {
         self.uuid = uuid
         self.name = name
         lastSeenTime = Date()
     }
-    
 }
+
 
 class BLEDeviceSelectionViewModel : NSObject, CBCentralManagerDelegate , BLEDeviceDelegate
 {
+    private let sections = ["Discovered Devices", "Stored Devices"]
+    
+    
+    var _sections = [(String, [BLEDeviceDiscovered])]()
+    
+    var numSections : Int {
+        get { return sections.count }
+    }
+    
+    func getSectionName(sectionNumber: Int) -> String
+    {
+        if (sectionNumber < 0) || (sectionNumber >= numSections)
+        {
+            return "section number \(sectionNumber) is out of range 0..\(numSections)"
+        }
+        
+        return sections[sectionNumber] as String
+    }
+    
+    func getCountInSection(sectionNumber: Int) -> Int
+    {
+        if (sectionNumber < 0) || (sectionNumber >= numSections)
+        {
+            print("section number \(sectionNumber) is out of range 0..\(self.numSections)")
+            assert(false)
+            return 0
+        }
+    
+        if sectionNumber == 0 {
+            return devices.value.count
+        } else if sectionNumber == 1 {
+            return persistentDevices.count
+        } else {
+            print ("SHOULD NEVER GET HERE")
+            assert(false)
+            return 0
+        }
+    }
+    
+    func getDeviceViewModel(section: Int, deviceNum: Int) -> BLEDeviceTableViewCellViewModel
+    {
+        if (section < 0) || (section >= sections.count)
+        {
+            return BLEDeviceTableViewCellViewModel_BLANK();
+        }
+        if (deviceNum < 0) || (deviceNum >= devices.value.count)
+        {
+            return BLEDeviceTableViewCellViewModel_BLANK();
+        }
+        
+        if (section == 0)
+        {
+            return BLEDeviceTableViewCellViewModel_Discovered(device: devices.value[deviceNum])
+        }
+        return BLEDeviceTableViewCellViewModel_PersistentDevice(theModel: persistentDevices[deviceNum])
+    }
+    
     func stateChange(device: BLEDeviceDiscovered) {
         triggerUIReload()
     }

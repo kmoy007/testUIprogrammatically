@@ -9,7 +9,44 @@
 import UIKit
 import Foundation
 
-class BLEDeviceTableViewCellViewModel
+protocol BLEDeviceTableViewCellViewModel
+{
+    func getDeviceNameForDisplay() -> String
+    func getDeviceMessageForDisplay() -> String
+    func getTextColorForDisplay() -> UIColor
+    func getShouldShowDeviceInfoButton() -> Bool
+    func getConnectionStateAsString() -> String
+    func getLastSuccessTime() -> String
+}
+
+class BLEDeviceTableViewCellViewModel_BLANK : BLEDeviceTableViewCellViewModel
+{
+    func getDeviceNameForDisplay() -> String{  return "ERROR - DUMMY DEVICE" }
+    func getDeviceMessageForDisplay() -> String{ return "ERROR - DUMMY DEVICE" }
+    func getTextColorForDisplay() -> UIColor{ return .red }
+    func getShouldShowDeviceInfoButton() -> Bool{ return false }
+    func getConnectionStateAsString() -> String { return "ERROR - DUMMY DEVICE" }
+    func getLastSuccessTime() -> String { return "ERROR - DUMMY DEVICE" }
+}
+
+class BLEDeviceTableViewCellViewModel_PersistentDevice : BLEDeviceTableViewCellViewModel
+{
+    private let model : PersistentDevice
+    
+    init(theModel : PersistentDevice)
+    {
+        model = theModel;
+    }
+    
+    func getDeviceNameForDisplay() -> String{  return model.name }
+    func getDeviceMessageForDisplay() -> String{ return "PersistObject" }
+    func getTextColorForDisplay() -> UIColor{ return .darkGray }
+    func getShouldShowDeviceInfoButton() -> Bool{ return false }
+    func getConnectionStateAsString() -> String { return "na" }
+    func getLastSuccessTime() -> String { return DateFormatter.localizedString(from: model.lastSeenTime as Date, dateStyle: .short, timeStyle: .short) }
+}
+
+class BLEDeviceTableViewCellViewModel_Discovered : BLEDeviceTableViewCellViewModel
 {
     private weak var weak_device : BLEDeviceDiscovered?
     init(device: BLEDeviceDiscovered)
